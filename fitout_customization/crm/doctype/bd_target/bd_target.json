@@ -1,0 +1,86 @@
+{
+  "name": "BD Target",
+  "doctype": "DocType",
+  "module": "Fitout Customization",
+  "custom": 0,
+  "is_submittable": 0,
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "sales_person",
+      "label": "Sales Person",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "year",
+      "label": "Year",
+      "fieldtype": "Select",
+      "options": "2024\n2025\n2026\n2027\n2028",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "annual_target",
+      "label": "Annual Target (AED)",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "quarterly_targets_section",
+      "label": "Quarterly Targets",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "q1_target",
+      "label": "Q1 Target (AED)",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "col_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "q2_target",
+      "label": "Q2 Target (AED)",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "col_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "q3_target",
+      "label": "Q3 Target (AED)",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "col_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "q4_target",
+      "label": "Q4 Target (AED)",
+      "fieldtype": "Currency"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Sales Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "Sales User",
+      "read": 1
+    }
+  ],
+  "title_field": "sales_person",
+  "sort_field": "year",
+  "sort_order": "DESC"
+}

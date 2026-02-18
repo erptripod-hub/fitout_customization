@@ -1,0 +1,135 @@
+[
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_brand",
+    "label": "Brand",
+    "fieldtype": "Data",
+    "insert_after": "company_name",
+    "in_list_view": 0,
+    "in_standard_filter": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_project_details_section",
+    "label": "Project Details",
+    "fieldtype": "Section Break",
+    "insert_after": "custom_brand"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_project_type",
+    "label": "Project Type",
+    "fieldtype": "Select",
+    "options": "\nRetail\nHospitality\nF&B\nOffice\nResidential\nOther",
+    "insert_after": "custom_project_details_section",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_scope",
+    "label": "Scope",
+    "fieldtype": "Select",
+    "options": "\nFurniture\nTurnkey\nFF&E\nJoinery\nFit-out\nOther",
+    "insert_after": "custom_project_type",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_col_break_1",
+    "fieldtype": "Column Break",
+    "insert_after": "custom_scope"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_estimated_value",
+    "label": "Estimated Value (AED)",
+    "fieldtype": "Currency",
+    "insert_after": "custom_col_break_1",
+    "in_list_view": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_customer_type",
+    "label": "Customer Type",
+    "fieldtype": "Select",
+    "options": "\nNew Acquisition\nExisting Active\nExisting Passive",
+    "insert_after": "custom_estimated_value",
+    "in_standard_filter": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_pipeline_section",
+    "label": "Pipeline & Follow-up",
+    "fieldtype": "Section Break",
+    "insert_after": "custom_customer_type"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_lead_status",
+    "label": "BD Status",
+    "fieldtype": "Select",
+    "options": "New\nContacted\nMeeting Scheduled\nQualified\nNot Interested\nLost\nConverted to Opportunity",
+    "insert_after": "custom_pipeline_section",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "default": "New"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_last_contact_date",
+    "label": "Last Contact Date",
+    "fieldtype": "Date",
+    "insert_after": "custom_lead_status"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_col_break_2",
+    "fieldtype": "Column Break",
+    "insert_after": "custom_last_contact_date"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_ghost_status",
+    "label": "Ghost Status",
+    "fieldtype": "Select",
+    "options": "Active\nStale\nGhost",
+    "insert_after": "custom_col_break_2",
+    "read_only": 1,
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "default": "Active"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_quarter",
+    "label": "Quarter",
+    "fieldtype": "Select",
+    "options": "\nQ1\nQ2\nQ3\nQ4",
+    "insert_after": "custom_ghost_status",
+    "read_only": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_next_action",
+    "label": "Next Action",
+    "fieldtype": "Small Text",
+    "insert_after": "custom_quarter"
+  }
+]
