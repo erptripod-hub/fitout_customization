@@ -7,10 +7,12 @@ app_description = "Custom app for fitout"
 app_email = "erp@tripodmena.com"
 app_license = "MIT"
 
+# include js in doctype views
 doctype_js = {
     "Lead": "public/js/lead.js"
 }
 
+# Fixtures
 fixtures = [
     {
         "dt": "Custom Field",

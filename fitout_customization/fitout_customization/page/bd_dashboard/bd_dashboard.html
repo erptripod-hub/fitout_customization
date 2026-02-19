@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BD Performance Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0c14;
+  --surface: #12151f;
+  --surface2: #1a1e2e;
+  --border: rgba(255,255,255,0.06);
+  --text: #e8eaf6;
+  --muted: #6b7296;
+  --accent: #4f8ef7;
+  --green: #22c55e;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --purple: #a855f7;
+  --teal: #14b8a6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+.header {
+  background: linear-gradient(135deg, #0d1117 0%, #161b2e 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-left h1 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.header-left h1 span { color: var(--accent); }
+.header-left p { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.header-right { display: flex; gap: 12px; align-items: center; }
+
+select {
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+  padding: 8px 14px; border-radius: 8px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; outline: none;
+}
+select:focus { border-color: var(--accent); }
+
+.btn-refresh {
+  background: var(--accent); color: #fff; border: none; padding: 8px 18px;
+  border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: opacity 0.2s;
+}
+.btn-refresh:hover { opacity: 0.85; }
+
+.dashboard { padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
+
+/* Summary Cards */
+.summary-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px;
+}
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 20px; position: relative; overflow: hidden;
+  animation: fadeUp 0.4s ease both;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-accent, var(--accent));
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
+.card-value { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; line-height: 1; }
+.card-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.card-icon { position: absolute; top: 16px; right: 16px; font-size: 22px; opacity: 0.15; }
+
+/* Two column layout */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+.panel {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 20px; animation: fadeUp 0.5s ease both;
+}
+.panel-title {
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.panel-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+/* Health indicators */
+.health-row { display: flex; gap: 12px; }
+.health-item {
+  flex: 1; background: var(--surface2); border-radius: 10px; padding: 14px;
+  text-align: center; border: 1px solid var(--border);
+}
+.health-count { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; }
+.health-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Bar chart */
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.bar-label { width: 120px; font-size: 12px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+.bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
+.bar-val { width: 40px; text-align: right; font-size: 12px; color: var(--muted); flex-shrink: 0; }
+
+/* Quarter grid */
+.quarter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.quarter-card {
+  background: var(--surface2); border-radius: 10px; padding: 14px; text-align: center;
+  border: 1px solid var(--border);
+}
+.q-label { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; color: var(--accent); }
+.q-count { font-size: 24px; font-weight: 700; margin: 4px 0; }
+.q-value { font-size: 11px; color: var(--muted); }
+.q-target { font-size: 11px; color: var(--yellow); margin-top: 4px; }
+.q-progress { height: 4px; background: var(--surface); border-radius: 2px; margin-top: 8px; overflow: hidden; }
+.q-progress-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.8s ease; }
+
+/* Table */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 500; padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 10px; border-bottom: 1px solid var(--border); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface2); }
+
+/* Badges */
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+.badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+.badge-yellow { background: rgba(245,158,11,0.15); color: var(--yellow); }
+.badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+.badge-blue { background: rgba(79,142,247,0.15); color: var(--accent); }
+
+/* Salesperson table target vs actual */
+.progress-cell { display: flex; align-items: center; gap: 8px; }
+.mini-bar { flex: 1; height: 6px; background: var(--surface); border-radius: 3px; overflow: hidden; min-width: 60px; }
+.mini-bar-fill { height: 100%; border-radius: 3px; }
+
+.loading { text-align: center; padding: 60px; color: var(--muted); font-size: 14px; }
+.aed { font-size: 11px; color: var(--muted); }
+
+/* Alert box */
+.alert-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+.alert-title { font-size: 13px; font-weight: 600; color: var(--red); margin-bottom: 4px; }
+.alert-sub { font-size: 12px; color: var(--muted); }
+
+/* Donut placeholder — pure CSS rings */
+.ring-wrap { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+.ring-item { display: flex; align-items: center; gap: 8px; }
+.ring-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.ring-text { font-size: 12px; }
+.ring-pct { font-weight: 600; }
+
+@media (max-width: 1200px) { .summary-grid { grid-template-columns: repeat(3, 1fr); } .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 800px) { .summary-grid { grid-template-columns: 1fr 1fr; } .grid-2, .grid-3 { grid-template-columns: 1fr; } .header { flex-direction: column; gap: 12px; align-items: flex-start; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>TRIPOD MENA | <span>BD Performance Dashboard</span></h1>
+    <p id="last-updated">Loading data...</p>
+  </div>
+  <div class="header-right">
+    <select id="year-filter">
+      <option value="2026">2026</option>
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+    </select>
+    <select id="owner-filter">
+      <option value="">All Salespersons</option>
+    </select>
+    <button class="btn-refresh" onclick="loadDashboard()">↻ Refresh</button>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div id="dashboard-content"><div class="loading">Loading dashboard data...</div></div>
+</div>
+
+<script>
+const colors = ['#4f8ef7','#a855f7','#22c55e','#f59e0b','#14b8a6','#ef4444','#f97316','#06b6d4'];
+
+function fmt(val) {
+  if (!val) return 'AED 0';
+  if (val >= 1000000) return 'AED ' + (val/1000000).toFixed(1) + 'M';
+  if (val >= 1000) return 'AED ' + (val/1000).toFixed(0) + 'K';
+  return 'AED ' + val.toLocaleString();
+}
+
+function pct(val, total) {
+  if (!total) return 0;
+  return Math.min(100, Math.round((val / total) * 100));
+}
+
+function statusBadge(s) {
+  const map = {
+    'Active': 'badge-green', 'Stale': 'badge-yellow', 'Ghost': 'badge-red',
+    'Qualified': 'badge-blue', 'Converted to Opportunity': 'badge-green',
+    'Lost': 'badge-red', 'Not Interested': 'badge-red', 'New': 'badge-blue'
+  };
+  return `<span class="badge ${map[s]||'badge-blue'}">${s||'—'}</span>`;
+}
+
+function buildBars(data, colorList) {
+  const entries = Object.entries(data).sort((a,b) => b[1]-a[1]);
+  const max = entries[0]?.[1] || 1;
+  return entries.map(([k, v], i) => `
+    <div class="bar-row">
+      <div class="bar-label" title="${k}">${k}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct(v,max)}%;background:${colorList[i%colorList.length]}"></div></div>
+      <div class="bar-val">${v}</div>
+    </div>`).join('');
+}
+
+function render(d) {
+  const s = d.summary;
+  const h = d.health;
+
+  // Get all unique owners for filter
+  const ownerSel = document.getElementById('owner-filter');
+  const currentOwner = ownerSel.value;
+  ownerSel.innerHTML = '<option value="">All Salespersons</option>';
+  d.by_owner.forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = o.name; opt.textContent = o.name;
+    if (o.name === currentOwner) opt.selected = true;
+    ownerSel.appendChild(opt);
+  });
+
+  document.getElementById('last-updated').textContent = 
+    `Last updated: ${new Date().toLocaleString()} | Year: ${d.year}`;
+
+  const html = `
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+      <div class="card" style="--card-accent:#4f8ef7">
+        <div class="card-icon">📋</div>
+        <div class="card-label">Total Leads</div>
+        <div class="card-value">${s.total}</div>
+        <div class="card-sub">All BD leads this year</div>
+      </div>
+      <div class="card" style="--card-accent:#22c55e">
+        <div class="card-icon">✅</div>
+        <div class="card-label">Qualified</div>
+        <div class="card-value">${s.qualified}</div>
+        <div class="card-sub">${pct(s.qualified, s.total)}% of total leads</div>
+      </div>
+      <div class="card" style="--card-accent:#a855f7">
+        <div class="card-icon">🚀</div>
+        <div class="card-label">Converted to Opp</div>
+        <div class="card-value">${s.converted}</div>
+        <div class="card-sub">${pct(s.converted, s.total)}% conversion rate</div>
+      </div>
+      <div class="card" style="--card-accent:#ef4444">
+        <div class="card-icon">❌</div>
+        <div class="card-label">Lost / Not Interested</div>
+        <div class="card-value">${s.lost}</div>
+        <div class="card-sub">${pct(s.lost, s.total)}% loss rate</div>
+      </div>
+      <div class="card" style="--card-accent:#14b8a6">
+        <div class="card-icon">💰</div>
+        <div class="card-label">Pipeline Value</div>
+        <div class="card-value" style="font-size:22px">${fmt(s.pipeline_value)}</div>
+        <div class="card-sub">Total estimated value</div>
+      </div>
+    </div>
+
+    <!-- Quarter Performance -->
+    <div class="panel" style="margin-bottom:24px">
+      <div class="panel-title"><span class="dot"></span>Quarterly Pipeline Overview</div>
+      <div class="quarter-grid">
+        ${['Q1','Q2','Q3','Q4'].map(q => {
+          const target = d.targets.reduce((sum, t) => sum + (t[q.toLowerCase()+'_target'] || 0), 0);
+          const value = d.quarter_value[q] || 0;
+          const progress = pct(value, target);
+          return `
+          <div class="quarter-card">
+            <div class="q-label">${q}</div>
+            <div class="q-count">${d.quarters[q] || 0} <span style="font-size:13px;color:var(--muted)">leads</span></div>
+            <div class="q-value">${fmt(value)}</div>
+            ${target ? `<div class="q-target">Target: ${fmt(target)}</div>
+            <div class="q-progress"><div class="q-progress-fill" style="width:${progress}%"></div></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">${progress}% of target</div>` : 
+            '<div class="q-target" style="color:var(--muted)">No target set</div>'}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- Salesperson Performance + Lead Health -->
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-title"><span class="dot" style="background:var(--green)"></span>Salesperson Performance</div>
+        <table class="data-table">
+          <thead><tr>
+            <th>Salesperson</th>
+            <th>Leads</th>
+            <th>Qualified</th>
+            <th>Converted</th>
+            <th>Pipeline Value</th>
+          </tr></thead>
+          <tbody>
+            ${d.by_owner.length ? d.by_owner.sort((a,b) => b.value - a.value).map(o => `
+              <tr>
+                <td><strong>${o.name.split('@')[0]}</strong></td>
+                <td>${o.total}</td>
+                <td>${o.qualified}</td>
+                <td>${o.converted}</td>
+                <td style="color:var(--teal)">${fmt(o.value)}</td>
+              </tr>`).join('') : '<tr><td colspan="5" style="color:var(--muted);text-align:center;padding:20px">No data yet</td></tr>'}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><span class="dot" style="background:var(--yellow)"></span>Lead Health Monitor</div>
+        <div class="health-row" style="margin-bottom:20px">
+          <div class="health-item">
+            <div class="health-count" style="color:var(--green)">${h.active}</div>
+            <div class="health-label">🟢 Active</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">Contacted < 30 days</div>
+          </div>
+          <div class="health-item">
+            <div class="health-count" style="color:var(--yellow)">${h.stale}</div>
+            <div class="health-label">🟡 Stale</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">30–60 days no contact</div>
+          </div>
+          <div class="health-item">
+            <div class="health-count" style="color:var(--red)">${h.ghost}</div>
+            <div class="health-label">🔴 Ghost</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">60+ days no contact</div>
+          </div>
+        </div>
+        ${d.ghost_leads.length ? `
+        <div class="panel-title" style="margin-top:8px"><span class="dot" style="background:var(--red)"></span>Urgent — Ghost/Stale Leads</div>
+        ${d.ghost_leads.slice(0,5).map(l => `
+          <div class="alert-box">
+            <div class="alert-title">${l.company_name || l.lead_name || l.name}</div>
+            <div class="alert-sub">${statusBadge(l.custom_ghost_status)} · Owner: ${(l.lead_owner||'Unassigned').split('@')[0]} · ${l.custom_lead_status||'Unknown status'}</div>
+          </div>`).join('')}` : 
+        '<div style="color:var(--green);font-size:13px;padding:10px 0">✅ No ghost or stale leads — great job!</div>'}
+      </div>
+    </div>
+
+    <!-- Analytics -->
+    <div class="grid-3">
+      <div class="panel">
+        <div class="panel-title"><span class="dot" style="background:var(--purple)"></span>By Project Type</div>
+        ${Object.keys(d.by_type).length ? buildBars(d.by_type, colors) : '<div style="color:var(--muted);font-size:13px">No data yet</div>'}
+      </div>
+      <div class="panel">
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>By Scope</div>
+        ${Object.keys(d.by_scope).length ? buildBars(d.by_scope, [colors[2],colors[4],colors[1],colors[0],colors[5]]) : '<div style="color:var(--muted);font-size:13px">No data yet</div>'}
+      </div>
+      <div class="panel">
+        <div class="panel-title"><span class="dot" style="background:var(--yellow)"></span>By Lead Source</div>
+        ${Object.keys(d.by_source).length ? buildBars(d.by_source, [colors[3],colors[0],colors[2],colors[5]]) : '<div style="color:var(--muted);font-size:13px">No data yet</div>'}
+      </div>
+    </div>
+
+    <!-- Target vs Actual Table -->
+    ${d.targets.length ? `
+    <div class="panel">
+      <div class="panel-title"><span class="dot" style="background:var(--accent)"></span>Annual Target vs Pipeline — ${d.year}</div>
+      <table class="data-table">
+        <thead><tr>
+          <th>Salesperson</th><th>Annual Target</th><th>Pipeline Value</th>
+          <th>Q1 Target</th><th>Q2 Target</th><th>Q3 Target</th><th>Q4 Target</th><th>Progress</th>
+        </tr></thead>
+        <tbody>
+          ${d.targets.map(t => {
+            const ownerData = d.by_owner.find(o => o.name === t.sales_person) || {};
+            const actual = ownerData.value || 0;
+            const prog = pct(actual, t.annual_target);
+            const barColor = prog >= 75 ? 'var(--green)' : prog >= 40 ? 'var(--yellow)' : 'var(--red)';
+            return `<tr>
+              <td><strong>${(t.sales_person||'').split('@')[0]}</strong></td>
+              <td>${fmt(t.annual_target)}</td>
+              <td style="color:var(--teal)">${fmt(actual)}</td>
+              <td>${fmt(t.q1_target)}</td>
+              <td>${fmt(t.q2_target)}</td>
+              <td>${fmt(t.q3_target)}</td>
+              <td>${fmt(t.q4_target)}</td>
+              <td>
+                <div class="progress-cell">
+                  <div class="mini-bar"><div class="mini-bar-fill" style="width:${prog}%;background:${barColor}"></div></div>
+                  <span style="font-size:12px;color:${barColor};width:36px">${prog}%</span>
+                </div>
+              </td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>` : `
+    <div class="panel">
+      <div class="panel-title"><span class="dot"></span>Salesperson Targets</div>
+      <div style="color:var(--muted);font-size:13px;padding:10px 0">
+        No targets set for ${d.year}. Go to <strong>BD Target</strong> to add yearly targets for each salesperson.
+      </div>
+    </div>`}
+  `;
+
+  document.getElementById('dashboard-content').innerHTML = html;
+}
+
+async function loadDashboard() {
+  document.getElementById('dashboard-content').innerHTML = '<div class="loading">Loading...</div>';
+  const year = document.getElementById('year-filter').value;
+  const owner = document.getElementById('owner-filter').value;
+  try {
+    const res = await frappe.call({
+      method: 'fitout_customization.fitout_customization.page.bd_dashboard.bd_dashboard.get_dashboard_data',
+      args: { year, salesperson: owner }
+    });
+    if (res.message) render(res.message);
+    else document.getElementById('dashboard-content').innerHTML = '<div class="loading">No data returned.</div>';
+  } catch(e) {
+    document.getElementById('dashboard-content').innerHTML = `<div class="loading">Error loading data: ${e.message || e}</div>`;
+  }
+}
+
+document.getElementById('year-filter').addEventListener('change', loadDashboard);
+document.getElementById('owner-filter').addEventListener('change', loadDashboard);
+
+// Load on ready
+frappe.ready(() => loadDashboard());
+</script>
+</body>
+</html>
