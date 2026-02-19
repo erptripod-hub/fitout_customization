@@ -7,15 +7,15 @@ app_description = "Custom app for fitout"
 app_email = "erp@tripodmena.com"
 app_license = "MIT"
 
-# include js in doctype views
 doctype_js = {
     "Lead": "public/js/lead.js"
 }
 
-# Fixtures - auto export/import custom fields
 fixtures = [
     {
         "dt": "Custom Field",
         "filters": [["dt", "=", "Lead"], ["fieldname", "like", "custom_%"]]
     }
 ]
+
+after_install = "fitout_customization.setup.after_install"
