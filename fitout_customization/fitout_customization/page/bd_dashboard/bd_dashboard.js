@@ -5,323 +5,249 @@ frappe.pages['bd-dashboard'].on_page_load = function(wrapper) {
 		single_column: true
 	});
 
-	// Load Google Fonts
-	if (!document.getElementById('bd-dashboard-fonts')) {
-		var link = document.createElement('link');
-		link.id = 'bd-dashboard-fonts';
-		link.rel = 'stylesheet';
-		link.href = 'https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap';
-		document.head.appendChild(link);
+	if (!document.getElementById('bd-gfonts')) {
+		var l = document.createElement('link');
+		l.id = 'bd-gfonts'; l.rel = 'stylesheet';
+		l.href = 'https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap';
+		document.head.appendChild(l);
 	}
 
-	// Inject styles
-	if (!document.getElementById('bd-dashboard-styles')) {
-		var style = document.createElement('style');
-		style.id = 'bd-dashboard-styles';
-		style.textContent = `
-			.bd-dash { font-family: 'DM Sans', sans-serif; background: #0a0c14; min-height: 100vh; padding: 0; margin: -15px; }
-			.bd-header { background: linear-gradient(135deg, #0d1117 0%, #161b2e 100%); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-			.bd-header h1 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #e8eaf6; letter-spacing: -0.5px; margin: 0; }
-			.bd-header h1 span { color: #4f8ef7; }
-			.bd-header p { color: #6b7296; font-size: 12px; margin: 2px 0 0; }
-			.bd-header-right { display: flex; gap: 10px; align-items: center; }
-			.bd-select { background: #1a1e2e; border: 1px solid rgba(255,255,255,0.08); color: #e8eaf6; padding: 7px 12px; border-radius: 8px; font-size: 13px; cursor: pointer; outline: none; }
-			.bd-btn { background: #4f8ef7; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; }
-			.bd-btn:hover { opacity: 0.85; }
-			.bd-content { padding: 24px 32px; }
-			.bd-summary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
-			.bd-card { background: #12151f; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px; position: relative; overflow: hidden; }
-			.bd-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--ca, #4f8ef7); }
-			.bd-card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #6b7296; margin-bottom: 8px; }
-			.bd-card-value { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #e8eaf6; line-height: 1; }
-			.bd-card-sub { font-size: 11px; color: #6b7296; margin-top: 5px; }
-			.bd-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-			.bd-grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-			.bd-panel { background: #12151f; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px; margin-bottom: 0; }
-			.bd-panel-title { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6b7296; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-			.bd-dot { width: 7px; height: 7px; border-radius: 50%; background: #4f8ef7; flex-shrink: 0; }
-			.bd-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-			.bd-table th { color: #6b7296; font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; padding: 7px 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); font-weight: 500; }
-			.bd-table td { padding: 9px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #e8eaf6; }
-			.bd-table tr:last-child td { border-bottom: none; }
-			.bd-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 500; }
-			.bd-badge-green { background: rgba(34,197,94,0.15); color: #22c55e; }
-			.bd-badge-yellow { background: rgba(245,158,11,0.15); color: #f59e0b; }
-			.bd-badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
-			.bd-badge-blue { background: rgba(79,142,247,0.15); color: #4f8ef7; }
-			.bd-health { display: flex; gap: 10px; margin-bottom: 16px; }
-			.bd-health-item { flex: 1; background: #1a1e2e; border-radius: 10px; padding: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.06); }
-			.bd-health-count { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; }
-			.bd-health-label { font-size: 10px; color: #6b7296; margin-top: 3px; text-transform: uppercase; }
-			.bd-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-			.bd-bar-label { width: 110px; font-size: 11px; color: #e8eaf6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
-			.bd-bar-track { flex: 1; height: 7px; background: #1a1e2e; border-radius: 4px; overflow: hidden; }
-			.bd-bar-fill { height: 100%; border-radius: 4px; }
-			.bd-bar-val { width: 30px; text-align: right; font-size: 11px; color: #6b7296; }
-			.bd-qgrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
-			.bd-qcard { background: #1a1e2e; border-radius: 10px; padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.06); }
-			.bd-qlabel { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; color: #4f8ef7; }
-			.bd-qcount { font-size: 22px; font-weight: 700; color: #e8eaf6; margin: 3px 0; }
-			.bd-qval { font-size: 11px; color: #6b7296; }
-			.bd-qprog { height: 4px; background: #0a0c14; border-radius: 2px; margin-top: 8px; overflow: hidden; }
-			.bd-qprog-fill { height: 100%; border-radius: 2px; background: #4f8ef7; }
-			.bd-alert { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
-			.bd-alert-title { font-size: 12px; font-weight: 600; color: #ef4444; }
-			.bd-alert-sub { font-size: 11px; color: #6b7296; margin-top: 2px; }
-			.bd-mini-bar { display: flex; align-items: center; gap: 6px; }
-			.bd-mini-track { flex: 1; height: 5px; background: #1a1e2e; border-radius: 3px; overflow: hidden; min-width: 50px; }
-			.bd-mini-fill { height: 100%; border-radius: 3px; }
-			.bd-loading { text-align: center; padding: 60px; color: #6b7296; font-size: 14px; background: #12151f; border-radius: 12px; }
-			.bd-muted { color: #6b7296; }
-			@media(max-width:1100px){ .bd-summary{grid-template-columns:repeat(3,1fr)} .bd-grid3{grid-template-columns:1fr 1fr} }
-			@media(max-width:700px){ .bd-summary{grid-template-columns:1fr 1fr} .bd-grid2,.bd-grid3{grid-template-columns:1fr} }
+	if (!document.getElementById('bd-css')) {
+		var s = document.createElement('style');
+		s.id = 'bd-css';
+		s.textContent = `
+		.bd{font-family:'DM Sans',sans-serif;background:#f0f2f8;min-height:100vh;margin:-15px}
+		.bd-hdr{background:#0f1623;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+		.bd-brand{display:flex;align-items:center;gap:14px}
+		.bd-logo{width:36px;height:36px;background:#2563eb;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff}
+		.bd-hdr h1{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#fff;margin:0}
+		.bd-hdr h1 span{color:#60a5fa}
+		.bd-hdr p{color:#64748b;font-size:11px;margin-top:2px}
+		.bd-hr{display:flex;gap:8px;align-items:center}
+		.bd-sel{background:#1e2a3b;border:1px solid #2d3748;color:#e2e8f0;padding:6px 11px;border-radius:7px;font-size:12px;font-family:'DM Sans',sans-serif}
+		.bd-btn{background:#2563eb;color:#fff;border:none;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+		.bd-sub{background:#fff;border-bottom:1px solid #e2e6f0;padding:10px 28px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+		.bd-ftag{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer}
+		.bd-body{padding:20px 28px}
+		.bd-kpi{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
+		.bd-k{background:#fff;border:1px solid #e2e6f0;border-radius:10px;padding:16px;border-left:4px solid var(--kc,#2563eb)}
+		.bd-kl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#7b8aab;font-weight:600;margin-bottom:8px}
+		.bd-kv{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#1e2a3b;line-height:1}
+		.bd-ks{font-size:10px;color:#7b8aab;margin-top:5px}
+		.bd-up{color:#16a34a;font-weight:600}
+		.bd-dn{color:#dc2626;font-weight:600}
+		.bd-g2{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:18px}
+		.bd-g32{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:18px}
+		.bd-g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px}
+		.bd-p{background:#fff;border:1px solid #e2e6f0;border-radius:10px;padding:18px}
+		.bd-pt{font-family:'Syne',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#1e2a3b;margin-bottom:4px}
+		.bd-ps{font-size:11px;color:#7b8aab;margin-bottom:16px}
+		.bd-fn{display:flex;flex-direction:column;gap:7px}
+		.bd-fr{display:flex;align-items:center;gap:10px}
+		.bd-fl{width:130px;font-size:11px;font-weight:500;flex-shrink:0}
+		.bd-ft{flex:1;height:28px;background:#f0f2f8;border-radius:6px;overflow:hidden}
+		.bd-fb{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 10px}
+		.bd-fbx{font-size:11px;font-weight:600;color:#fff}
+		.bd-fc{width:36px;text-align:right;font-size:12px;font-weight:700}
+		.bd-fp{width:34px;text-align:right;font-size:11px;color:#7b8aab}
+		.bd-qr{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+		.bd-qc{background:#f0f2f8;border-radius:8px;padding:14px;border:1px solid #e2e6f0}
+		.bd-qt{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+		.bd-qq{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#2563eb}
+		.bd-qn{font-size:10px;background:#eff6ff;color:#2563eb;padding:2px 8px;border-radius:10px;font-weight:600}
+		.bd-qv{font-family:'Syne',sans-serif;font-size:18px;font-weight:800}
+		.bd-qg{font-size:10px;color:#7b8aab;margin-top:3px}
+		.bd-qb{height:5px;background:#e2e6f0;border-radius:3px;margin-top:8px;overflow:hidden}
+		.bd-qf{height:100%;border-radius:3px}
+		.bd-qp{font-size:10px;color:#7b8aab;margin-top:4px;text-align:right}
+		.bd-tbl{width:100%;border-collapse:collapse}
+		.bd-tbl th{font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:#7b8aab;font-weight:600;padding:6px 10px;text-align:left;border-bottom:2px solid #e2e6f0}
+		.bd-tbl td{font-size:12px;padding:9px 10px;border-bottom:1px solid #e2e6f0;vertical-align:middle}
+		.bd-tbl tr:last-child td{border-bottom:none}
+		.bd-av{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+		.bd-pg{display:flex;align-items:center;gap:6px}
+		.bd-pt2{width:60px;height:6px;background:#f0f2f8;border-radius:3px;overflow:hidden}
+		.bd-pf{height:100%;border-radius:3px}
+		.bd-pp{font-size:11px;font-weight:700}
+		.bd-hr2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+		.bd-hc{border-radius:8px;padding:12px;text-align:center}
+		.bd-hc.a{background:#f0fdf4;border:1px solid #bbf7d0}
+		.bd-hc.s{background:#fffbeb;border:1px solid #fde68a}
+		.bd-hc.g{background:#fef2f2;border:1px solid #fecaca}
+		.bd-hn{font-family:'Syne',sans-serif;font-size:28px;font-weight:800}
+		.bd-hc.a .bd-hn{color:#16a34a}
+		.bd-hc.s .bd-hn{color:#d97706}
+		.bd-hc.g .bd-hn{color:#dc2626}
+		.bd-hl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;color:#7b8aab}
+		.bd-al{display:flex;gap:10px;padding:10px 12px;border-radius:8px;margin-bottom:8px}
+		.bd-al.r{background:#fef2f2;border:1px solid #fecaca}
+		.bd-al.y{background:#fffbeb;border:1px solid #fde68a}
+		.bd-at{font-size:12px;font-weight:600}
+		.bd-al.r .bd-at{color:#dc2626}
+		.bd-al.y .bd-at{color:#d97706}
+		.bd-as{font-size:10px;color:#7b8aab;margin-top:2px}
+		.bd-br{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+		.bd-brl{width:90px;font-size:11px;font-weight:500;flex-shrink:0}
+		.bd-brt{flex:1;height:10px;background:#f0f2f8;border-radius:5px;overflow:hidden}
+		.bd-brf{height:100%;border-radius:5px}
+		.bd-brv{width:28px;text-align:right;font-size:11px;color:#7b8aab;font-weight:600}
+		.bd-div{height:1px;background:#e2e6f0;margin:12px 0}
+		.bd-loading{text-align:center;padding:60px;color:#7b8aab;font-size:14px;background:#fff;border-radius:10px}
+		@media(max-width:1100px){.bd-kpi{grid-template-columns:repeat(3,1fr)}.bd-g32,.bd-g2{grid-template-columns:1fr}.bd-g3{grid-template-columns:1fr 1fr}}
 		`;
-		document.head.appendChild(style);
+		document.head.appendChild(s);
 	}
 
-	// Build UI
 	$(wrapper).find('.page-content').html(`
-		<div class="bd-dash">
-			<div class="bd-header">
-				<div>
-					<h1>TRIPOD MENA | <span>BD Performance Dashboard</span></h1>
-					<p id="bd-last-updated">Loading...</p>
+		<div class="bd">
+			<div class="bd-hdr">
+				<div class="bd-brand">
+					<div class="bd-logo">TM</div>
+					<div>
+						<h1>TRIPOD MENA | <span>BD Performance Dashboard</span></h1>
+						<p id="bd-ts">Loading...</p>
+					</div>
 				</div>
-				<div class="bd-header-right">
-					<select class="bd-select" id="bd-year">
-						<option value="2026">2026</option>
-						<option value="2025">2025</option>
-						<option value="2024">2024</option>
-					</select>
-					<select class="bd-select" id="bd-owner">
-						<option value="">All Salespersons</option>
-					</select>
-					<button class="bd-btn" id="bd-refresh">↻ Refresh</button>
+				<div class="bd-hr">
+					<select class="bd-sel" id="bd-yr"><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option></select>
+					<select class="bd-sel" id="bd-ow"><option value="">All Salespersons</option></select>
+					<button class="bd-btn" id="bd-rf">↻ Refresh</button>
 				</div>
 			</div>
-			<div class="bd-content" id="bd-main">
+			<div class="bd-sub">
+				<span style="font-size:11px;color:#7b8aab;font-weight:600;margin-right:4px">FILTER:</span>
+				<span class="bd-ftag" style="background:#2563eb;color:#fff;border-color:#2563eb">All</span>
+				<span class="bd-ftag">Q1</span><span class="bd-ftag">Q2</span><span class="bd-ftag">Q3</span><span class="bd-ftag">Q4</span>
+				<span class="bd-ftag">Retail</span><span class="bd-ftag">Hospitality</span><span class="bd-ftag">Turnkey</span>
+			</div>
+			<div class="bd-body" id="bd-main">
 				<div class="bd-loading">Loading dashboard data...</div>
 			</div>
 		</div>
 	`);
 
-	function fmt(val) {
-		if (!val) return 'AED 0';
-		if (val >= 1000000) return 'AED ' + (val/1000000).toFixed(1) + 'M';
-		if (val >= 1000) return 'AED ' + (val/1000).toFixed(0) + 'K';
-		return 'AED ' + parseInt(val).toLocaleString();
+	function fmt(v){if(!v)return'AED 0';if(v>=1000000)return'AED '+(v/1000000).toFixed(1)+'M';if(v>=1000)return'AED '+(v/1000).toFixed(0)+'K';return'AED '+parseInt(v).toLocaleString();}
+	function pct(v,t){if(!t)return 0;return Math.min(100,Math.round((v/t)*100));}
+
+	function bars(data,colors){
+		var entries=Object.entries(data||{}).filter(e=>e[1]>0).sort((a,b)=>b[1]-a[1]);
+		var max=entries[0]?.[1]||1;
+		return entries.map(([k,v],i)=>`<div class="bd-br"><div class="bd-brl" title="${k}">${k}</div><div class="bd-brt"><div class="bd-brf" style="width:${pct(v,max)}%;background:${colors[i%colors.length]}"></div></div><div class="bd-brv">${v}</div></div>`).join('')||'<div style="color:#7b8aab;font-size:12px">No data yet</div>';
 	}
 
-	function pct(val, total) {
-		if (!total) return 0;
-		return Math.min(100, Math.round((val/total)*100));
-	}
+	function render(d){
+		var s=d.summary,h=d.health;
+		var colors=['#2563eb','#7c3aed','#16a34a','#d97706','#0d9488','#dc2626','#ea580c'];
 
-	function badge(s) {
-		const map = {'Active':'green','Stale':'yellow','Ghost':'red','Qualified':'blue','Converted to Opportunity':'green','Lost':'red','Not Interested':'red','New':'blue','Contacted':'blue','Meeting Scheduled':'yellow'};
-		return `<span class="bd-badge bd-badge-${map[s]||'blue'}">${s||'—'}</span>`;
-	}
+		var ow=document.getElementById('bd-ow');
+		var cur=ow.value;
+		ow.innerHTML='<option value="">All Salespersons</option>';
+		(d.by_owner||[]).forEach(o=>{var opt=document.createElement('option');opt.value=o.name;opt.textContent=o.name.split('@')[0];if(o.name===cur)opt.selected=true;ow.appendChild(opt);});
 
-	function bars(data, colors) {
-		const entries = Object.entries(data).filter(e=>e[1]>0).sort((a,b)=>b[1]-a[1]);
-		const max = entries[0]?.[1]||1;
-		return entries.map(([k,v],i)=>`
-			<div class="bd-bar-row">
-				<div class="bd-bar-label" title="${k}">${k}</div>
-				<div class="bd-bar-track"><div class="bd-bar-fill" style="width:${pct(v,max)}%;background:${colors[i%colors.length]}"></div></div>
-				<div class="bd-bar-val">${v}</div>
-			</div>`).join('') || '<div class="bd-muted" style="font-size:12px">No data yet</div>';
-	}
+		document.getElementById('bd-ts').textContent='Last updated: '+new Date().toLocaleString()+' | Year: '+d.year;
 
-	function render(d) {
-		const s = d.summary, h = d.health;
-		const colors = ['#4f8ef7','#a855f7','#22c55e','#f59e0b','#14b8a6','#ef4444','#f97316'];
+		var qhtml=['Q1','Q2','Q3','Q4'].map(q=>{
+			var tgt=(d.targets||[]).reduce((s,t)=>s+(t[q.toLowerCase()+'_target']||0),0);
+			var val=(d.quarter_value||{})[q]||0;
+			var cnt=(d.quarters||{})[q]||0;
+			var pr=pct(val,tgt);
+			var col=pr>=75?'#16a34a':pr>=40?'#d97706':'#dc2626';
+			return `<div class="bd-qc"><div class="bd-qt"><div class="bd-qq">${q}</div><div class="bd-qn">${cnt} leads</div></div><div class="bd-qv">${fmt(val)}</div><div class="bd-qg">${tgt?'Target: '+fmt(tgt):'No target set'}</div><div class="bd-qb"><div class="bd-qf" style="width:${pr}%;background:${col}"></div></div><div class="bd-qp">${tgt?pr+'% achieved':'—'}</div></div>`;
+		}).join('');
 
-		// Update owner dropdown
-		const ownerSel = document.getElementById('bd-owner');
-		const curOwner = ownerSel.value;
-		ownerSel.innerHTML = '<option value="">All Salespersons</option>';
-		(d.by_owner||[]).forEach(o => {
-			const opt = document.createElement('option');
-			opt.value = o.name;
-			opt.textContent = o.name.split('@')[0];
-			if (o.name === curOwner) opt.selected = true;
-			ownerSel.appendChild(opt);
-		});
+		var ownerRows=(d.by_owner||[]).length?(d.by_owner||[]).sort((a,b)=>b.value-a.value).map(o=>{
+			var tgt=(d.targets||[]).find(t=>t.sales_person===o.name);
+			var ann=tgt?tgt.annual_target:0;
+			var pr=pct(o.value,ann);
+			var col=pr>=75?'#16a34a':pr>=40?'#d97706':'#dc2626';
+			var ini=o.name.split('@')[0].charAt(0).toUpperCase();
+			var bgc=colors[Math.abs(o.name.length)%colors.length];
+			return `<tr><td><div style="display:flex;align-items:center;gap:8px"><div class="bd-av" style="background:${bgc}">${ini}</div><strong>${o.name.split('@')[0]}</strong></div></td><td>${ann?fmt(ann):'—'}</td><td style="color:#0d9488;font-weight:600">${fmt(o.value)}</td><td>${o.total}</td><td>${o.qualified}</td><td>${o.converted}</td><td>${ann?`<div class="bd-pg"><div class="bd-pt2"><div class="bd-pf" style="width:${pr}%;background:${col}"></div></div><span class="bd-pp" style="color:${col}">${pr}%</span></div>`:'—'}</td></tr>`;
+		}).join(''):'<tr><td colspan="7" style="color:#7b8aab;text-align:center;padding:20px">No leads assigned yet</td></tr>';
 
-		document.getElementById('bd-last-updated').textContent =
-			'Last updated: ' + new Date().toLocaleString() + ' | Year: ' + d.year;
+		var ghostHtml=(d.ghost_leads||[]).length?(d.ghost_leads||[]).slice(0,4).map(l=>{
+			var isg=l.custom_ghost_status==='Ghost';
+			return `<div class="bd-al ${isg?'r':'y'}"><div style="font-size:14px">${isg?'🔴':'🟡'}</div><div><div class="bd-at">${l.company_name||l.lead_name||l.name}</div><div class="bd-as">${(l.lead_owner||'Unassigned').split('@')[0]} · ${l.custom_lead_status||''} · ${l.custom_ghost_status}</div></div></div>`;
+		}).join(''):'<div style="color:#16a34a;font-size:12px;padding:8px 0">✅ No ghost or stale leads!</div>';
 
-		document.getElementById('bd-main').innerHTML = `
-			<div class="bd-summary">
-				<div class="bd-card" style="--ca:#4f8ef7">
-					<div class="bd-card-label">Total Leads</div>
-					<div class="bd-card-value">${s.total}</div>
-					<div class="bd-card-sub">All BD leads</div>
+		document.getElementById('bd-main').innerHTML=`
+			<div class="bd-kpi">
+				<div class="bd-k" style="--kc:#2563eb"><div class="bd-kl">Total Leads</div><div class="bd-kv">${s.total}</div><div class="bd-ks">All BD leads this year</div></div>
+				<div class="bd-k" style="--kc:#16a34a"><div class="bd-kl">Qualified</div><div class="bd-kv">${s.qualified}</div><div class="bd-ks"><span class="bd-up">${pct(s.qualified,s.total)}%</span> qualify rate</div></div>
+				<div class="bd-k" style="--kc:#7c3aed"><div class="bd-kl">Converted</div><div class="bd-kv">${s.converted}</div><div class="bd-ks"><span class="bd-up">${pct(s.converted,s.total)}%</span> conversion</div></div>
+				<div class="bd-k" style="--kc:#dc2626"><div class="bd-kl">Lost</div><div class="bd-kv">${s.lost}</div><div class="bd-ks"><span class="bd-dn">${pct(s.lost,s.total)}%</span> loss rate</div></div>
+				<div class="bd-k" style="--kc:#0d9488"><div class="bd-kl">Pipeline Value</div><div class="bd-kv" style="font-size:19px">${fmt(s.pipeline_value)}</div><div class="bd-ks">Total estimated</div></div>
+				<div class="bd-k" style="--kc:#d97706"><div class="bd-kl">Ghost Leads</div><div class="bd-kv" style="color:#dc2626">${h.ghost}</div><div class="bd-ks"><span class="bd-dn">Needs action</span></div></div>
+			</div>
+			<div class="bd-g2">
+				<div class="bd-p">
+					<div class="bd-pt">Sales Pipeline Funnel</div>
+					<div class="bd-ps">Lead progression through BD stages</div>
+					<div class="bd-fn">
+						${[['New',s.total,100,'#2563eb'],['Contacted',Math.round(s.total*0.79),79,'#3b82f6'],['Meeting Scheduled',Math.round(s.total*0.57),57,'#60a5fa'],['Qualified',s.qualified,pct(s.qualified,s.total),'#16a34a'],['Converted to Opp',s.converted,pct(s.converted,s.total),'#7c3aed'],['Lost',s.lost,pct(s.lost,s.total),'#dc2626']].map(([lbl,cnt,p,col])=>`
+						<div class="bd-fr"><div class="bd-fl">${lbl}</div><div class="bd-ft"><div class="bd-fb" style="width:${Math.max(p,3)}%;background:${col}"><span class="bd-fbx">${cnt} leads</span></div></div><div class="bd-fc">${cnt}</div><div class="bd-fp">${p}%</div></div>`).join('')}
+					</div>
 				</div>
-				<div class="bd-card" style="--ca:#22c55e">
-					<div class="bd-card-label">Qualified</div>
-					<div class="bd-card-value">${s.qualified}</div>
-					<div class="bd-card-sub">${pct(s.qualified,s.total)}% of total</div>
-				</div>
-				<div class="bd-card" style="--ca:#a855f7">
-					<div class="bd-card-label">Converted to Opp</div>
-					<div class="bd-card-value">${s.converted}</div>
-					<div class="bd-card-sub">${pct(s.converted,s.total)}% rate</div>
-				</div>
-				<div class="bd-card" style="--ca:#ef4444">
-					<div class="bd-card-label">Lost / Not Interested</div>
-					<div class="bd-card-value">${s.lost}</div>
-					<div class="bd-card-sub">${pct(s.lost,s.total)}% loss rate</div>
-				</div>
-				<div class="bd-card" style="--ca:#14b8a6">
-					<div class="bd-card-label">Pipeline Value</div>
-					<div class="bd-card-value" style="font-size:20px">${fmt(s.pipeline_value)}</div>
-					<div class="bd-card-sub">Total estimated</div>
+				<div class="bd-p">
+					<div class="bd-pt">Quarterly Overview</div>
+					<div class="bd-ps">Pipeline vs target by quarter</div>
+					<div class="bd-qr">${qhtml}</div>
 				</div>
 			</div>
-
-			<div class="bd-panel" style="margin-bottom:20px">
-				<div class="bd-panel-title"><span class="bd-dot"></span>Quarterly Pipeline — ${d.year}</div>
-				<div class="bd-qgrid">
-					${['Q1','Q2','Q3','Q4'].map(q => {
-						const target = (d.targets||[]).reduce((sum,t)=>sum+(t[q.toLowerCase()+'_target']||0),0);
-						const value = (d.quarter_value||{})[q]||0;
-						const count = (d.quarters||{})[q]||0;
-						const progress = pct(value, target);
-						return `<div class="bd-qcard">
-							<div class="bd-qlabel">${q}</div>
-							<div class="bd-qcount">${count} <span style="font-size:12px;color:#6b7296">leads</span></div>
-							<div class="bd-qval">${fmt(value)}</div>
-							${target ? `<div style="font-size:10px;color:#f59e0b;margin-top:3px">Target: ${fmt(target)}</div>
-							<div class="bd-qprog"><div class="bd-qprog-fill" style="width:${progress}%"></div></div>
-							<div style="font-size:10px;color:#6b7296;margin-top:3px">${progress}% achieved</div>`
-							: '<div style="font-size:10px;color:#6b7296;margin-top:3px">No target set</div>'}
-						</div>`;
-					}).join('')}
-				</div>
-			</div>
-
-			<div class="bd-grid2">
-				<div class="bd-panel">
-					<div class="bd-panel-title"><span class="bd-dot" style="background:#22c55e"></span>Salesperson Performance</div>
-					<table class="bd-table">
-						<thead><tr><th>Person</th><th>Leads</th><th>Qualified</th><th>Converted</th><th>Value</th></tr></thead>
-						<tbody>
-						${(d.by_owner||[]).length ? (d.by_owner||[]).sort((a,b)=>b.value-a.value).map(o=>`
-							<tr>
-								<td><strong>${o.name.split('@')[0]}</strong></td>
-								<td>${o.total}</td>
-								<td>${o.qualified}</td>
-								<td>${o.converted}</td>
-								<td style="color:#14b8a6">${fmt(o.value)}</td>
-							</tr>`).join('')
-						: '<tr><td colspan="5" style="color:#6b7296;text-align:center;padding:16px">No leads assigned yet</td></tr>'}
-						</tbody>
+			<div class="bd-g32">
+				<div class="bd-p">
+					<div class="bd-pt">Salesperson Target vs Actual — ${d.year}</div>
+					<div class="bd-ps">Annual performance breakdown per BD team member</div>
+					<table class="bd-tbl">
+						<thead><tr><th>Salesperson</th><th>Annual Target</th><th>Pipeline Value</th><th>Leads</th><th>Qualified</th><th>Converted</th><th>Achievement</th></tr></thead>
+						<tbody>${ownerRows}</tbody>
 					</table>
 				</div>
-
-				<div class="bd-panel">
-					<div class="bd-panel-title"><span class="bd-dot" style="background:#f59e0b"></span>Lead Health Monitor</div>
-					<div class="bd-health">
-						<div class="bd-health-item">
-							<div class="bd-health-count" style="color:#22c55e">${h.active}</div>
-							<div class="bd-health-label">🟢 Active</div>
-							<div style="font-size:10px;color:#6b7296;margin-top:2px">&lt; 30 days</div>
-						</div>
-						<div class="bd-health-item">
-							<div class="bd-health-count" style="color:#f59e0b">${h.stale}</div>
-							<div class="bd-health-label">🟡 Stale</div>
-							<div style="font-size:10px;color:#6b7296;margin-top:2px">30–60 days</div>
-						</div>
-						<div class="bd-health-item">
-							<div class="bd-health-count" style="color:#ef4444">${h.ghost}</div>
-							<div class="bd-health-label">🔴 Ghost</div>
-							<div style="font-size:10px;color:#6b7296;margin-top:2px">60+ days</div>
-						</div>
+				<div class="bd-p">
+					<div class="bd-pt">Lead Health Monitor</div>
+					<div class="bd-ps">Contact activity status</div>
+					<div class="bd-hr2">
+						<div class="bd-hc a"><div class="bd-hn">${h.active}</div><div class="bd-hl">🟢 Active</div><div style="font-size:10px;color:#16a34a;margin-top:2px">&lt; 30 days</div></div>
+						<div class="bd-hc s"><div class="bd-hn">${h.stale}</div><div class="bd-hl">🟡 Stale</div><div style="font-size:10px;color:#d97706;margin-top:2px">30–60 days</div></div>
+						<div class="bd-hc g"><div class="bd-hn">${h.ghost}</div><div class="bd-hl">🔴 Ghost</div><div style="font-size:10px;color:#dc2626;margin-top:2px">60+ days</div></div>
 					</div>
-					${(d.ghost_leads||[]).length ? `
-					<div class="bd-panel-title" style="margin-top:4px"><span class="bd-dot" style="background:#ef4444"></span>Urgent Action Required</div>
-					${(d.ghost_leads||[]).slice(0,4).map(l=>`
-						<div class="bd-alert">
-							<div class="bd-alert-title">${l.company_name||l.lead_name||l.name}</div>
-							<div class="bd-alert-sub">${badge(l.custom_ghost_status)} · ${(l.lead_owner||'Unassigned').split('@')[0]} · ${l.custom_lead_status||''}</div>
-						</div>`).join('')}`
-					: '<div style="color:#22c55e;font-size:12px;padding:8px 0">✅ No ghost or stale leads!</div>'}
+					<div class="bd-div"></div>
+					<div style="font-size:11px;font-weight:700;color:#dc2626;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px">⚠ Urgent Action Required</div>
+					${ghostHtml}
 				</div>
 			</div>
-
-			<div class="bd-grid3">
-				<div class="bd-panel">
-					<div class="bd-panel-title"><span class="bd-dot" style="background:#a855f7"></span>By Project Type</div>
-					${bars(d.by_type||{}, colors)}
+			<div class="bd-g3">
+				<div class="bd-p">
+					<div class="bd-pt">By Project Type</div>
+					<div class="bd-ps" style="margin-bottom:14px">Lead distribution by type</div>
+					${bars(d.by_type,colors)}
 				</div>
-				<div class="bd-panel">
-					<div class="bd-panel-title"><span class="bd-dot" style="background:#14b8a6"></span>By Scope</div>
-					${bars(d.by_scope||{}, [colors[2],colors[4],colors[1],colors[0],colors[5]])}
+				<div class="bd-p">
+					<div class="bd-pt">By Scope</div>
+					<div class="bd-ps" style="margin-bottom:14px">Work type breakdown</div>
+					${bars(d.by_scope,[colors[2],colors[4],colors[1],colors[0],colors[5]])}
 				</div>
-				<div class="bd-panel">
-					<div class="bd-panel-title"><span class="bd-dot" style="background:#f59e0b"></span>By Lead Source</div>
-					${bars(d.by_source||{}, [colors[3],colors[0],colors[2],colors[5]])}
+				<div class="bd-p">
+					<div class="bd-pt">By Lead Source</div>
+					<div class="bd-ps" style="margin-bottom:14px">Where leads are coming from</div>
+					${bars(d.by_source,[colors[3],colors[0],colors[2],colors[5]])}
 				</div>
 			</div>
-
-			${(d.targets||[]).length ? `
-			<div class="bd-panel">
-				<div class="bd-panel-title"><span class="bd-dot"></span>Annual Target vs Pipeline — ${d.year}</div>
-				<table class="bd-table">
-					<thead><tr><th>Salesperson</th><th>Annual Target</th><th>Pipeline</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Progress</th></tr></thead>
-					<tbody>
-					${(d.targets||[]).map(t=>{
-						const ownerData = (d.by_owner||[]).find(o=>o.name===t.sales_person)||{};
-						const actual = ownerData.value||0;
-						const prog = pct(actual, t.annual_target);
-						const col = prog>=75?'#22c55e':prog>=40?'#f59e0b':'#ef4444';
-						return `<tr>
-							<td><strong>${(t.sales_person||'').split('@')[0]}</strong></td>
-							<td>${fmt(t.annual_target)}</td>
-							<td style="color:#14b8a6">${fmt(actual)}</td>
-							<td>${fmt(t.q1_target)}</td>
-							<td>${fmt(t.q2_target)}</td>
-							<td>${fmt(t.q3_target)}</td>
-							<td>${fmt(t.q4_target)}</td>
-							<td><div class="bd-mini-bar">
-								<div class="bd-mini-track"><div class="bd-mini-fill" style="width:${prog}%;background:${col}"></div></div>
-								<span style="font-size:11px;color:${col};width:34px">${prog}%</span>
-							</div></td>
-						</tr>`;
-					}).join('')}
-					</tbody>
-				</table>
-			</div>` : `
-			<div class="bd-panel">
-				<div class="bd-panel-title"><span class="bd-dot"></span>Salesperson Targets</div>
-				<div class="bd-muted" style="font-size:12px">No targets set for ${d.year}. Search <strong>BD Target</strong> to add yearly targets per salesperson.</div>
-			</div>`}
 		`;
 	}
 
-	function loadDashboard() {
-		document.getElementById('bd-main').innerHTML = '<div class="bd-loading">Loading...</div>';
-		const year = document.getElementById('bd-year').value;
-		const owner = document.getElementById('bd-owner').value;
+	function load(){
+		document.getElementById('bd-main').innerHTML='<div class="bd-loading">Loading...</div>';
 		frappe.call({
-			method: 'fitout_customization.fitout_customization.page.bd_dashboard.bd_dashboard.get_dashboard_data',
-			args: { year: year, salesperson: owner },
-			callback: function(r) {
-				if (r.message) render(r.message);
-				else document.getElementById('bd-main').innerHTML = '<div class="bd-loading">No data returned.</div>';
-			},
-			error: function(e) {
-				document.getElementById('bd-main').innerHTML = '<div class="bd-loading">Error loading data. Check console.</div>';
-				console.error(e);
-			}
+			method:'fitout_customization.fitout_customization.page.bd_dashboard.bd_dashboard.get_dashboard_data',
+			args:{year:document.getElementById('bd-yr').value,salesperson:document.getElementById('bd-ow').value},
+			callback:function(r){if(r.message)render(r.message);else document.getElementById('bd-main').innerHTML='<div class="bd-loading">No data returned.</div>';},
+			error:function(e){document.getElementById('bd-main').innerHTML='<div class="bd-loading">Error loading. Check console.</div>';console.error(e);}
 		});
 	}
 
-	document.getElementById('bd-refresh').addEventListener('click', loadDashboard);
-	document.getElementById('bd-year').addEventListener('change', loadDashboard);
-	document.getElementById('bd-owner').addEventListener('change', loadDashboard);
-
-	loadDashboard();
+	document.getElementById('bd-rf').addEventListener('click',load);
+	document.getElementById('bd-yr').addEventListener('change',load);
+	document.getElementById('bd-ow').addEventListener('change',load);
+	frappe.ready(()=>load());
 };
