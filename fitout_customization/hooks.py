@@ -19,3 +19,4 @@ fixtures = [
 ]
 
 after_install = "fitout_customization.setup.after_install"
+after_migrate = "fitout_customization.setup.after_install"
