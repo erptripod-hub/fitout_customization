@@ -1,15 +1,30 @@
 {
-  "creation": "2026-02-19 00:00:00.000000",
-  "doctype": "Page",
-  "module": "Fitout Customization",
-  "name": "bd-dashboard",
-  "page_name": "bd-dashboard",
-  "restrict_to_domain": "",
-  "roles": [
-    {"role": "Sales Manager"},
-    {"role": "Sales User"},
-    {"role": "System Manager"}
-  ],
-  "standard": "Yes",
-  "title": "BD Performance Dashboard"
+ "content": null,
+ "creation": "2026-02-19 00:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-02-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Fitout Customization",
+ "name": "bd-dashboard",
+ "owner": "Administrator",
+ "page_name": "bd-dashboard",
+ "restrict_to_domain": "",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Sales User"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "BD Performance Dashboard"
 }
