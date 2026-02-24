@@ -1,0 +1,180 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:SURVEY-{opportunity}-{####}",
+  "creation": "2026-02-24 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "opportunity",
+    "customer",
+    "project_name",
+    "col_break_1",
+    "status",
+    "assigned_to",
+    "survey_date",
+    "section_break_site_conditions",
+    "access_constraints",
+    "existing_conditions",
+    "utilities_location",
+    "col_break_2",
+    "structural_limitations",
+    "safety_considerations",
+    "site_challenges",
+    "section_break_notes",
+    "notes",
+    "section_break_photos",
+    "photos"
+  ],
+  "fields": [
+    {
+      "fieldname": "opportunity",
+      "fieldtype": "Link",
+      "label": "Opportunity",
+      "options": "Opportunity",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fetch_from": "opportunity.customer_name",
+      "fieldname": "customer",
+      "fieldtype": "Data",
+      "label": "Customer",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "opportunity.title",
+      "fieldname": "project_name",
+      "fieldtype": "Data",
+      "label": "Project Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Pending\nIn Progress\nCompleted",
+      "default": "Pending",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Link",
+      "label": "Assigned To (PM)",
+      "options": "User",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "survey_date",
+      "fieldtype": "Date",
+      "label": "Survey Date"
+    },
+    {
+      "fieldname": "section_break_site_conditions",
+      "fieldtype": "Section Break",
+      "label": "Site Conditions"
+    },
+    {
+      "fieldname": "access_constraints",
+      "fieldtype": "Small Text",
+      "label": "Access Constraints"
+    },
+    {
+      "fieldname": "existing_conditions",
+      "fieldtype": "Small Text",
+      "label": "Existing Conditions"
+    },
+    {
+      "fieldname": "utilities_location",
+      "fieldtype": "Small Text",
+      "label": "Utilities Location"
+    },
+    {
+      "fieldname": "col_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "structural_limitations",
+      "fieldtype": "Small Text",
+      "label": "Structural Limitations"
+    },
+    {
+      "fieldname": "safety_considerations",
+      "fieldtype": "Small Text",
+      "label": "Safety Considerations"
+    },
+    {
+      "fieldname": "site_challenges",
+      "fieldtype": "Small Text",
+      "label": "Site-Specific Challenges"
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Additional Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Survey Notes"
+    },
+    {
+      "fieldname": "section_break_photos",
+      "fieldtype": "Section Break",
+      "label": "Site Photos"
+    },
+    {
+      "fieldname": "photos",
+      "fieldtype": "Attach Image",
+      "label": "Attach Photos"
+    }
+  ],
+  "links": [
+    {
+      "link_doctype": "Opportunity",
+      "link_fieldname": "name"
+    }
+  ],
+  "modified": "2026-02-24 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Fitout Customization",
+  "name": "Site Survey",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Sales User",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Projects User",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "project_name",
+  "track_changes": 1
+}

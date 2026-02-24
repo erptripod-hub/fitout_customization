@@ -1,0 +1,49 @@
+[
+  {
+    "doctype": "Custom Field",
+    "dt": "Opportunity",
+    "fieldname": "custom_fitout_estimation_section",
+    "label": "Fitout Estimation Details",
+    "fieldtype": "Section Break",
+    "insert_after": "items",
+    "collapsible": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Opportunity",
+    "fieldname": "custom_boq_type",
+    "label": "BOQ Type",
+    "fieldtype": "Select",
+    "options": "\nFitout\nJoinery\nBoth",
+    "insert_after": "custom_fitout_estimation_section",
+    "in_list_view": 0,
+    "in_standard_filter": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Opportunity",
+    "fieldname": "custom_col_break_boq",
+    "fieldtype": "Column Break",
+    "insert_after": "custom_boq_type"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Opportunity",
+    "fieldname": "custom_rfi_required",
+    "label": "RFI Required",
+    "fieldtype": "Check",
+    "insert_after": "custom_col_break_boq",
+    "in_list_view": 0,
+    "default": "0"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Opportunity",
+    "fieldname": "custom_site_survey_required",
+    "label": "Site Survey Required",
+    "fieldtype": "Check",
+    "insert_after": "custom_rfi_required",
+    "in_list_view": 0,
+    "default": "0"
+  }
+]

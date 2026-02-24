@@ -6,10 +6,21 @@ def after_install():
     install_custom_fields()
 
 def install_custom_fields():
-    path = os.path.join(os.path.dirname(__file__),
-        "custom/custom_fields/lead_custom_fields.json")
+    # Install Lead custom fields
+    install_custom_fields_from_file("custom/custom_fields/lead_custom_fields.json")
+    
+    # Install Opportunity custom fields
+    install_custom_fields_from_file("custom/custom_fields/opportunity_custom_fields.json")
+
+def install_custom_fields_from_file(relative_path):
+    path = os.path.join(os.path.dirname(__file__), relative_path)
+    
+    if not os.path.exists(path):
+        return
+    
     with open(path) as f:
         fields = json.load(f)
+    
     for field in fields:
         fieldname = field.get("fieldname")
         dt = field.get("dt")

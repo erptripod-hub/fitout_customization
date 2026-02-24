@@ -17,6 +17,10 @@ fixtures = [
     {
         "dt": "Custom Field",
         "filters": [["dt", "=", "Lead"], ["fieldname", "like", "custom_%"]]
+    },
+    {
+        "dt": "Custom Field",
+        "filters": [["dt", "=", "Opportunity"], ["fieldname", "like", "custom_%"]]
     }
 ]
 

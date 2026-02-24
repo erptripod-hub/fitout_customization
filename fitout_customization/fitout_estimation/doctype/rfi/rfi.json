@@ -1,0 +1,143 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:RFI-{opportunity}-{####}",
+  "creation": "2026-02-24 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "opportunity",
+    "customer",
+    "project_name",
+    "col_break_1",
+    "status",
+    "date_sent",
+    "date_received",
+    "section_break_questions",
+    "questions",
+    "section_break_responses",
+    "responses",
+    "section_break_attachments",
+    "attachments"
+  ],
+  "fields": [
+    {
+      "fieldname": "opportunity",
+      "fieldtype": "Link",
+      "label": "Opportunity",
+      "options": "Opportunity",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fetch_from": "opportunity.customer_name",
+      "fieldname": "customer",
+      "fieldtype": "Data",
+      "label": "Customer",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "opportunity.title",
+      "fieldname": "project_name",
+      "fieldtype": "Data",
+      "label": "Project Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nSent\nReceived\nCompleted",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "date_sent",
+      "fieldtype": "Date",
+      "label": "Date Sent"
+    },
+    {
+      "fieldname": "date_received",
+      "fieldtype": "Date",
+      "label": "Date Received"
+    },
+    {
+      "fieldname": "section_break_questions",
+      "fieldtype": "Section Break",
+      "label": "Questions"
+    },
+    {
+      "fieldname": "questions",
+      "fieldtype": "Text Editor",
+      "label": "Questions / Information Required"
+    },
+    {
+      "fieldname": "section_break_responses",
+      "fieldtype": "Section Break",
+      "label": "Client Responses"
+    },
+    {
+      "fieldname": "responses",
+      "fieldtype": "Text Editor",
+      "label": "Responses Received"
+    },
+    {
+      "fieldname": "section_break_attachments",
+      "fieldtype": "Section Break",
+      "label": "Attachments"
+    },
+    {
+      "fieldname": "attachments",
+      "fieldtype": "Attach",
+      "label": "Attach Files"
+    }
+  ],
+  "links": [
+    {
+      "link_doctype": "Opportunity",
+      "link_fieldname": "name"
+    }
+  ],
+  "modified": "2026-02-24 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Fitout Customization",
+  "name": "RFI",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Sales User",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Sales Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "project_name",
+  "track_changes": 1
+}
