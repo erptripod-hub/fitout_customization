@@ -100,7 +100,7 @@
   "links": [
     {
       "link_doctype": "Opportunity",
-      "link_fieldname": "name"
+      "link_fieldname": "opportunity"
     }
   ],
   "modified": "2026-02-24 00:00:00.000000",
