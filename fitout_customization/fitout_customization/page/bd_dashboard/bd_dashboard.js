@@ -5,81 +5,252 @@ frappe.pages['bd-dashboard'].on_page_load = function(wrapper) {
 		single_column: true
 	});
 
-	page.add_inner_button('Refresh', function() {
-		load_data();
-	});
+	page.add_inner_button('Refresh', function() { load_data(); });
 
 	$('<style>').text(
-		'.bdd { padding: 20px; background: #f5f7fa; min-height: 100vh; }' +
-		'.bdd .hdr { background: #fff; border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; border-left: 4px solid #2563eb; }' +
-		'.bdd .hdr h2 { font-size: 16px; font-weight: 700; color: #1e293b; margin: 0; }' +
-		'.bdd .hdr p { font-size: 11px; color: #64748b; margin-top: 4px; }' +
-		'.bdd .row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }' +
-		'.bdd .card { background: #fff; border-radius: 8px; padding: 16px; border-top: 3px solid #2563eb; }' +
-		'.bdd .card .lbl { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }' +
-		'.bdd .card .val { font-size: 28px; font-weight: 800; color: #1e293b; }' +
-		'.bdd .panels { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }' +
-		'.bdd .panel { background: #fff; border-radius: 8px; padding: 16px; }' +
-		'.bdd .panel h3 { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 14px; }' +
-		'.bdd .br { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }' +
-		'.bdd .br .lbl { width: 120px; font-size: 12px; color: #374151; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
-		'.bdd .br .trk { flex: 1; height: 12px; background: #f1f5f9; border-radius: 4px; overflow: hidden; }' +
-		'.bdd .br .fil { height: 100%; border-radius: 4px; }' +
-		'.bdd .br .num { width: 28px; text-align: right; font-size: 12px; font-weight: 700; color: #1e293b; }' +
-		'.bdd .loading { text-align: center; padding: 60px; color: #64748b; }'
+		'.bdd { padding: 20px; background: #f0f4f8; min-height: 100vh; }' +
+		'.bdd .hdr { background: #0f1623; border-radius: 8px; padding: 16px 22px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }' +
+		'.bdd .hdr h2 { font-size: 16px; font-weight: 800; color: #fff; margin: 0; }' +
+		'.bdd .hdr h2 span { color: #60a5fa; }' +
+		'.bdd .hdr p { font-size: 11px; color: #64748b; margin-top: 3px; }' +
+		'.bdd .hdr-r { display: flex; gap: 8px; align-items: center; }' +
+		'.bdd .hdr-r select { background: #1e2a3b; border: 1px solid #2d3748; color: #e2e8f0; padding: 6px 10px; border-radius: 6px; font-size: 12px; }' +
+		'.bdd .krow { display: grid; grid-template-columns: repeat(6,1fr); gap: 12px; margin-bottom: 16px; }' +
+		'.bdd .kc { background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-top: 4px solid #2563eb; }' +
+		'.bdd .kc .t { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 600; margin-bottom: 8px; }' +
+		'.bdd .kc .v { font-size: 26px; font-weight: 800; color: #1e293b; line-height: 1; }' +
+		'.bdd .kc .s { font-size: 10px; color: #64748b; margin-top: 5px; }' +
+		'.bdd .g2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; margin-bottom: 16px; }' +
+		'.bdd .g32 { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; margin-bottom: 16px; }' +
+		'.bdd .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 16px; }' +
+		'.bdd .pn { background: #fff; border-radius: 8px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }' +
+		'.bdd .pt { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 3px; }' +
+		'.bdd .ps { font-size: 11px; color: #64748b; margin-bottom: 14px; }' +
+		'.bdd .fr { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }' +
+		'.bdd .fl { width: 150px; font-size: 11px; font-weight: 500; flex-shrink: 0; color: #374151; }' +
+		'.bdd .fk { flex: 1; height: 24px; background: #f1f5f9; border-radius: 5px; overflow: hidden; }' +
+		'.bdd .fb { height: 100%; border-radius: 5px; display: flex; align-items: center; padding: 0 8px; min-width: 30px; }' +
+		'.bdd .fb span { font-size: 11px; font-weight: 600; color: #fff; }' +
+		'.bdd .fn { width: 28px; text-align: right; font-size: 12px; font-weight: 700; color: #1e293b; }' +
+		'.bdd .fp { width: 32px; text-align: right; font-size: 11px; color: #64748b; }' +
+		'.bdd .qg { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }' +
+		'.bdd .qc { background: #f8fafc; border-radius: 8px; padding: 14px; border: 1px solid #e2e8f0; }' +
+		'.bdd .qc .qh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }' +
+		'.bdd .qc .ql { font-size: 16px; font-weight: 800; color: #2563eb; }' +
+		'.bdd .qc .qn { font-size: 10px; background: #eff6ff; color: #2563eb; padding: 2px 8px; border-radius: 10px; font-weight: 600; }' +
+		'.bdd .qc .qv { font-size: 17px; font-weight: 700; color: #1e293b; }' +
+		'.bdd .qc .qt { font-size: 10px; color: #64748b; margin-top: 3px; }' +
+		'.bdd .qc .qb { height: 5px; background: #e2e8f0; border-radius: 3px; margin-top: 8px; overflow: hidden; }' +
+		'.bdd .qc .qf { height: 100%; border-radius: 3px; }' +
+		'.bdd .qc .qp { font-size: 10px; color: #64748b; margin-top: 4px; text-align: right; }' +
+		'.bdd table { width: 100%; border-collapse: collapse; }' +
+		'.bdd th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #64748b; font-weight: 600; padding: 7px 10px; text-align: left; border-bottom: 2px solid #e2e8f0; }' +
+		'.bdd td { font-size: 12px; padding: 9px 10px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; color: #1e293b; }' +
+		'.bdd tr:last-child td { border-bottom: none; }' +
+		'.bdd tr:hover td { background: #f8fafc; }' +
+		'.bdd .av { width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; }' +
+		'.bdd .pg { display: flex; align-items: center; gap: 6px; }' +
+		'.bdd .pk { width: 60px; height: 6px; background: #f1f5f9; border-radius: 3px; overflow: hidden; }' +
+		'.bdd .pf { height: 100%; border-radius: 3px; }' +
+		'.bdd .hg { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px; }' +
+		'.bdd .hc { border-radius: 8px; padding: 12px; text-align: center; }' +
+		'.bdd .hc.a { background: #f0fdf4; border: 1px solid #bbf7d0; }' +
+		'.bdd .hc.s { background: #fffbeb; border: 1px solid #fde68a; }' +
+		'.bdd .hc.g { background: #fef2f2; border: 1px solid #fecaca; }' +
+		'.bdd .hc .hn { font-size: 28px; font-weight: 800; }' +
+		'.bdd .hc.a .hn { color: #16a34a; }' +
+		'.bdd .hc.s .hn { color: #d97706; }' +
+		'.bdd .hc.g .hn { color: #dc2626; }' +
+		'.bdd .hc .hl { font-size: 10px; font-weight: 700; text-transform: uppercase; margin-top: 2px; color: #64748b; }' +
+		'.bdd .hc .hx { font-size: 10px; margin-top: 2px; }' +
+		'.bdd .hc.a .hx { color: #16a34a; }' +
+		'.bdd .hc.s .hx { color: #d97706; }' +
+		'.bdd .hc.g .hx { color: #dc2626; }' +
+		'.bdd .al { display: flex; gap: 10px; padding: 10px 12px; border-radius: 8px; margin-bottom: 8px; }' +
+		'.bdd .al.r { background: #fef2f2; border: 1px solid #fecaca; }' +
+		'.bdd .al.y { background: #fffbeb; border: 1px solid #fde68a; }' +
+		'.bdd .al .an { font-size: 12px; font-weight: 600; }' +
+		'.bdd .al.r .an { color: #dc2626; }' +
+		'.bdd .al.y .an { color: #d97706; }' +
+		'.bdd .al .ax { font-size: 10px; color: #64748b; margin-top: 2px; }' +
+		'.bdd .br2 { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }' +
+		'.bdd .bl { width: 110px; font-size: 11px; font-weight: 500; flex-shrink: 0; color: #374151; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
+		'.bdd .bt { flex: 1; height: 10px; background: #f1f5f9; border-radius: 5px; overflow: hidden; }' +
+		'.bdd .bf { height: 100%; border-radius: 5px; }' +
+		'.bdd .bv { width: 28px; text-align: right; font-size: 11px; color: #64748b; font-weight: 600; }' +
+		'.bdd .dv { height: 1px; background: #e2e8f0; margin: 12px 0; }' +
+		'.bdd .ug { font-size: 11px; font-weight: 700; color: #dc2626; margin-bottom: 10px; text-transform: uppercase; }' +
+		'.bdd .ld { text-align: center; padding: 60px; color: #64748b; font-size: 14px; }'
 	).appendTo('head');
 
 	$(wrapper).find('.page-content').html(
 		'<div class="bdd">' +
-		'<div class="hdr"><h2>BD Performance Dashboard — Tripod MENA</h2><p id="bd-time">Loading...</p></div>' +
-		'<div id="bd-body"><div class="loading">Loading data...</div></div>' +
+		'<div class="hdr">' +
+		'<div><h2>TRIPOD MENA | <span>BD Performance Dashboard</span></h2><p id="bd-ts">Loading...</p></div>' +
+		'<div class="hdr-r">' +
+		'<select id="bd-yr"><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option></select>' +
+		'<select id="bd-ow"><option value="">All Salespersons</option></select>' +
+		'</div>' +
+		'</div>' +
+		'<div id="bd-body"><div class="ld">Loading data...</div></div>' +
 		'</div>'
 	);
 
-	function render(d) {
-		document.getElementById('bd-time').textContent = 'Last updated: ' + new Date().toLocaleString();
+	document.getElementById('bd-yr').addEventListener('change', load_data);
+	document.getElementById('bd-ow').addEventListener('change', load_data);
 
+	function fmt(v) {
+		if (!v) return 'AED 0';
+		if (v >= 1000000) return 'AED ' + (v/1000000).toFixed(1) + 'M';
+		if (v >= 1000) return 'AED ' + Math.round(v/1000) + 'K';
+		return 'AED ' + parseInt(v).toLocaleString();
+	}
+
+	function pc(v, t) { return t ? Math.min(100, Math.round(v * 100 / t)) : 0; }
+
+	function make_bars(obj, cols) {
+		var entries = Object.entries(obj).filter(function(x) { return x[1] > 0; }).sort(function(a,b) { return b[1]-a[1]; });
+		if (!entries.length) return '<div style="color:#64748b;font-size:12px;padding:8px 0">No data yet</div>';
+		var mx = entries[0][1];
+		return entries.map(function(x, i) {
+			return '<div class="br2">' +
+				'<div class="bl" title="' + x[0] + '">' + x[0] + '</div>' +
+				'<div class="bt"><div class="bf" style="width:' + pc(x[1],mx) + '%;background:' + cols[i % cols.length] + '"></div></div>' +
+				'<div class="bv">' + x[1] + '</div>' +
+				'</div>';
+		}).join('');
+	}
+
+	function render(d) {
 		var cols = ['#2563eb','#7c3aed','#16a34a','#d97706','#0d9488','#dc2626','#f97316','#06b6d4'];
 
-		function make_bars(obj) {
-			var entries = Object.entries(obj).sort(function(a,b){ return b[1]-a[1]; });
-			var max = entries.length ? entries[0][1] : 1;
-			return entries.map(function(e, i) {
-				var w = Math.round(e[1]*100/max);
-				return '<div class="br">' +
-					'<div class="lbl" title="'+e[0]+'">'+e[0]+'</div>' +
-					'<div class="trk"><div class="fil" style="width:'+w+'%;background:'+cols[i%cols.length]+'"></div></div>' +
-					'<div class="num">'+e[1]+'</div>' +
-					'</div>';
-			}).join('');
-		}
+		var ow = document.getElementById('bd-ow');
+		var cur = ow.value;
+		ow.innerHTML = '<option value="">All Salespersons</option>';
+		(d.owner_data || []).forEach(function(o) {
+			var op = document.createElement('option');
+			op.value = o.name;
+			op.textContent = o.name.split('@')[0];
+			if (o.name === cur) op.selected = true;
+			ow.appendChild(op);
+		});
 
-		var html =
-			'<div class="row">' +
-			'<div class="card" style="border-top-color:#2563eb"><div class="lbl">Total Leads</div><div class="val">'+d.total+'</div></div>' +
-			'<div class="card" style="border-top-color:#16a34a"><div class="lbl">Open</div><div class="val">'+(d.by_status['Open']||0)+'</div></div>' +
-			'<div class="card" style="border-top-color:#7c3aed"><div class="lbl">Converted</div><div class="val">'+(d.by_status['Converted']||0)+'</div></div>' +
-			'<div class="card" style="border-top-color:#dc2626"><div class="lbl">Do Not Contact</div><div class="val">'+(d.by_status['Do Not Contact']||0)+'</div></div>' +
-			'</div>' +
-			'<div class="panels">' +
-			'<div class="panel"><h3>Leads by Status</h3>'+make_bars(d.by_status)+'</div>' +
-			'<div class="panel"><h3>Leads by Salesperson</h3>'+make_bars(d.by_owner)+'</div>' +
-			'<div class="panel"><h3>Leads by Source</h3>'+make_bars(d.by_source)+'</div>' +
+		document.getElementById('bd-ts').textContent = 'Last updated: ' + new Date().toLocaleString() + ' | Year: ' + d.year;
+
+		// KPI cards
+		var krow =
+			'<div class="krow">' +
+			'<div class="kc" style="border-top-color:#2563eb"><div class="t">Total Leads</div><div class="v">' + d.total + '</div><div class="s">All leads</div></div>' +
+			'<div class="kc" style="border-top-color:#16a34a"><div class="t">Qualified</div><div class="v">' + d.qualified + '</div><div class="s" style="color:#16a34a">' + pc(d.qualified, d.total) + '% rate</div></div>' +
+			'<div class="kc" style="border-top-color:#7c3aed"><div class="t">Converted</div><div class="v">' + d.converted + '</div><div class="s" style="color:#16a34a">' + pc(d.converted, d.total) + '% rate</div></div>' +
+			'<div class="kc" style="border-top-color:#dc2626"><div class="t">Lost</div><div class="v">' + d.lost + '</div><div class="s" style="color:#dc2626">' + pc(d.lost, d.total) + '% rate</div></div>' +
+			'<div class="kc" style="border-top-color:#0d9488"><div class="t">Pipeline Value</div><div class="v" style="font-size:20px">' + fmt(d.pipeline_value) + '</div><div class="s">Estimated total</div></div>' +
+			'<div class="kc" style="border-top-color:#d97706"><div class="t">Ghost Leads</div><div class="v" style="color:#dc2626">' + d.ghost + '</div><div class="s" style="color:#dc2626">Need action</div></div>' +
 			'</div>';
 
-		document.getElementById('bd-body').innerHTML = html;
+		// Funnel
+		var bd_statuses = [
+			['New Lead', d.by_status['New Lead'] || 0, '#2563eb'],
+			['Contacted', d.by_status['Contacted'] || 0, '#3b82f6'],
+			['Meeting Scheduled', d.by_status['Meeting Scheduled'] || 0, '#60a5fa'],
+			['Qualified', d.qualified, '#16a34a'],
+			['Converted to Opportunity', d.converted, '#7c3aed'],
+			['Lost', d.lost, '#dc2626']
+		];
+		var funnel = bd_statuses.map(function(r) {
+			var p = pc(r[1], d.total);
+			return '<div class="fr">' +
+				'<div class="fl">' + r[0] + '</div>' +
+				'<div class="fk"><div class="fb" style="width:' + Math.max(p, 2) + '%;background:' + r[2] + '"><span>' + r[1] + '</span></div></div>' +
+				'<div class="fn">' + r[1] + '</div>' +
+				'<div class="fp">' + p + '%</div>' +
+				'</div>';
+		}).join('');
+
+		// Quarters
+		var qhtml = ['Q1','Q2','Q3','Q4'].map(function(q) {
+			var tgt = (d.targets || []).reduce(function(sum, t) { return sum + (t[q.toLowerCase() + '_target'] || 0); }, 0);
+			var val = (d.quarter_value || {})[q] || 0;
+			var cnt = (d.quarters || {})[q] || 0;
+			var pr = pc(val, tgt);
+			var col = pr >= 75 ? '#16a34a' : pr >= 40 ? '#d97706' : '#dc2626';
+			return '<div class="qc">' +
+				'<div class="qh"><div class="ql">' + q + '</div><div class="qn">' + cnt + ' leads</div></div>' +
+				'<div class="qv">' + fmt(val) + '</div>' +
+				'<div class="qt">' + (tgt ? 'Target: ' + fmt(tgt) : 'No target set') + '</div>' +
+				'<div class="qb"><div class="qf" style="width:' + pr + '%;background:' + col + '"></div></div>' +
+				'<div class="qp">' + (tgt ? pr + '% achieved' : '—') + '</div>' +
+				'</div>';
+		}).join('');
+
+		// Owner table
+		var orows = (d.owner_data || []).sort(function(a,b) { return b.value - a.value; }).map(function(o, i) {
+			var tgt = (d.targets || []).find(function(t) { return t.sales_person === o.name; }) || {};
+			var ann = tgt.annual_target || 0;
+			var pr = pc(o.value, ann);
+			var col = pr >= 75 ? '#16a34a' : pr >= 40 ? '#d97706' : '#dc2626';
+			var ini = o.name.split('@')[0].charAt(0).toUpperCase();
+			return '<tr>' +
+				'<td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:' + cols[i % cols.length] + '">' + ini + '</div><strong>' + o.name.split('@')[0] + '</strong></div></td>' +
+				'<td>' + (ann ? fmt(ann) : '—') + '</td>' +
+				'<td style="color:#0d9488;font-weight:600">' + fmt(o.value) + '</td>' +
+				'<td>' + o.total + '</td>' +
+				'<td>' + o.qualified + '</td>' +
+				'<td>' + o.converted + '</td>' +
+				'<td>' + (ann ? '<div class="pg"><div class="pk"><div class="pf" style="width:' + pr + '%;background:' + col + '"></div></div><span style="font-size:11px;font-weight:700;color:' + col + '">' + pr + '%</span></div>' : '—') + '</td>' +
+				'</tr>';
+		}).join('') || '<tr><td colspan="7" style="color:#64748b;text-align:center;padding:20px">No data</td></tr>';
+
+		// Ghost alerts
+		var ghtml = (d.ghost_leads || []).length ? (d.ghost_leads || []).map(function(l) {
+			var isg = l.custom_ghost_status === 'Ghost';
+			return '<div class="al ' + (isg ? 'r' : 'y') + '">' +
+				'<div style="font-size:15px">' + (isg ? '🔴' : '🟡') + '</div>' +
+				'<div><div class="an">' + (l.company_name || l.lead_name || l.name) + '</div>' +
+				'<div class="ax">' + (l.lead_owner || 'Unassigned').split('@')[0] + ' · ' + (l.custom_lead_status || '') + ' · ' + l.custom_ghost_status + '</div></div>' +
+				'</div>';
+		}).join('') : '<div style="color:#16a34a;font-size:12px;padding:8px 0">No ghost or stale leads</div>';
+
+		document.getElementById('bd-body').innerHTML =
+			krow +
+			'<div class="g2">' +
+			'<div class="pn"><div class="pt">BD Pipeline Funnel</div><div class="ps">Lead progression through BD stages</div>' + funnel + '</div>' +
+			'<div class="pn"><div class="pt">Quarterly Overview</div><div class="ps">Pipeline value vs target</div><div class="qg">' + qhtml + '</div></div>' +
+			'</div>' +
+			'<div class="g32">' +
+			'<div class="pn"><div class="pt">Salesperson Performance</div><div class="ps">Target vs actual — ' + d.year + '</div>' +
+			'<table><thead><tr><th>Salesperson</th><th>Annual Target</th><th>Pipeline Value</th><th>Leads</th><th>Qualified</th><th>Converted</th><th>Achievement</th></tr></thead>' +
+			'<tbody>' + orows + '</tbody></table></div>' +
+			'<div class="pn"><div class="pt">Lead Health Monitor</div><div class="ps">Contact activity status</div>' +
+			'<div class="hg">' +
+			'<div class="hc a"><div class="hn">' + d.active + '</div><div class="hl">Active</div><div class="hx">under 30 days</div></div>' +
+			'<div class="hc s"><div class="hn">' + d.stale + '</div><div class="hl">Stale</div><div class="hx">30-60 days</div></div>' +
+			'<div class="hc g"><div class="hn">' + d.ghost + '</div><div class="hl">Ghost</div><div class="hx">60+ days</div></div>' +
+			'</div>' +
+			'<div class="dv"></div><div class="ug">Urgent Action Required</div>' +
+			ghtml + '</div>' +
+			'</div>' +
+			'<div class="g3">' +
+			'<div class="pn"><div class="pt">By Project Type</div><div class="ps" style="margin-bottom:14px">Lead distribution</div>' + make_bars(d.by_type, cols) + '</div>' +
+			'<div class="pn"><div class="pt">By Scope</div><div class="ps" style="margin-bottom:14px">Work type</div>' + make_bars(d.by_scope, [cols[2],cols[4],cols[1],cols[0],cols[5]]) + '</div>' +
+			'<div class="pn"><div class="pt">By Customer Type</div><div class="ps" style="margin-bottom:14px">New vs existing</div>' + make_bars(d.by_ctype, [cols[3],cols[0],cols[2],cols[5]]) + '</div>' +
+			'</div>';
 	}
 
 	function load_data() {
-		document.getElementById('bd-body').innerHTML = '<div class="loading">Loading...</div>';
+		document.getElementById('bd-body').innerHTML = '<div class="ld">Loading...</div>';
 		frappe.call({
 			method: 'fitout_customization.fitout_customization.page.bd_dashboard.bd_dashboard.get_dashboard_data',
+			args: {
+				year: document.getElementById('bd-yr').value,
+				salesperson: document.getElementById('bd-ow').value
+			},
 			callback: function(r) {
 				if (r.message) render(r.message);
-				else document.getElementById('bd-body').innerHTML = '<div class="loading">No data.</div>';
+				else document.getElementById('bd-body').innerHTML = '<div class="ld">No data returned.</div>';
 			},
 			error: function(e) {
-				document.getElementById('bd-body').innerHTML = '<div class="loading">Error: ' + (e.message||'check console') + '</div>';
+				document.getElementById('bd-body').innerHTML = '<div class="ld">Error loading data.</div>';
 				console.error(e);
 			}
 		});
