@@ -9,7 +9,8 @@ app_license = "MIT"
 
 # include js in doctype views
 doctype_js = {
-    "Lead": "public/js/lead.js"
+    "Lead": "public/js/lead.js",
+    "Opportunity": "public/js/opportunity.js"
 }
 
 # Fixtures
