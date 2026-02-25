@@ -149,7 +149,7 @@ frappe.pages['bd-dashboard'].on_page_load = function(wrapper) {
 		var kpi1 =
 			'<div class="sec">Pipeline Overview</div>' +
 			'<div class="krow6" style="margin-bottom:16px">' +
-			'<div class="kc" style="border-top-color:#2563eb"><div class="t">Total Leads</div><div class="v">'+d.total+'</div><div class="s">All active leads</div></div>' +
+			'<div class="kc" style="border-top-color:#2563eb"><div class="t">BD Pipeline Leads</div><div class="v">'+d.total+'</div><div class="s">of '+d.total_all+' total leads</div></div>' +
 			'<div class="kc" style="border-top-color:#0d9488"><div class="t">Pipeline Value</div><div class="v" style="font-size:18px">'+fmt(d.pipeline_value)+'</div><div class="s">Gross estimated</div></div>' +
 			'<div class="kc" style="border-top-color:#7c3aed"><div class="t">Weighted Pipeline</div><div class="v" style="font-size:18px">'+fmt(d.weighted_pipeline)+'</div><div class="s">Probability adjusted</div></div>' +
 			'<div class="kc" style="border-top-color:#16a34a"><div class="t">Est. Margin Value</div><div class="v" style="font-size:18px">'+fmt(d.total_margin)+'</div><div class="s">Gross profit est.</div></div>' +
