@@ -58,11 +58,31 @@
   {
     "doctype": "Custom Field",
     "dt": "Lead",
+    "fieldname": "custom_estimated_margin_pct",
+    "label": "Estimated Margin %",
+    "fieldtype": "Percent",
+    "insert_after": "custom_estimated_value",
+    "description": "Estimated gross profit margin percentage"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
     "fieldname": "custom_customer_type",
     "label": "Customer Type",
     "fieldtype": "Select",
     "options": "\nNew Acquisition\nExisting Active\nExisting Passive",
-    "insert_after": "custom_estimated_value",
+    "insert_after": "custom_estimated_margin_pct",
+    "in_standard_filter": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_city",
+    "label": "City",
+    "fieldtype": "Select",
+    "options": "\nDubai\nAbu Dhabi\nSharjah\nRiyadh\nJeddah\nDoha\nKuwait City\nMuscat\nOther",
+    "insert_after": "custom_customer_type",
+    "in_list_view": 0,
     "in_standard_filter": 1
   },
   {
@@ -71,7 +91,7 @@
     "fieldname": "custom_pipeline_section",
     "label": "Pipeline & Follow-up",
     "fieldtype": "Section Break",
-    "insert_after": "custom_customer_type"
+    "insert_after": "custom_city"
   },
   {
     "doctype": "Custom Field",
@@ -88,10 +108,28 @@
   {
     "doctype": "Custom Field",
     "dt": "Lead",
+    "fieldname": "custom_probability",
+    "label": "Probability %",
+    "fieldtype": "Percent",
+    "insert_after": "custom_lead_status",
+    "description": "Likelihood of winning this deal. Auto-suggested: New=10%, Contacted=20%, Meeting=40%, Qualified=60%, Converted=80%"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
+    "fieldname": "custom_expected_close_date",
+    "label": "Expected Close Date",
+    "fieldtype": "Date",
+    "insert_after": "custom_probability",
+    "in_list_view": 0
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Lead",
     "fieldname": "custom_last_contact_date",
     "label": "Last Contact Date",
     "fieldtype": "Date",
-    "insert_after": "custom_lead_status"
+    "insert_after": "custom_expected_close_date"
   },
   {
     "doctype": "Custom Field",
