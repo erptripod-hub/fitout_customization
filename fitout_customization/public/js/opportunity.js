@@ -58,10 +58,9 @@ function check_site_survey(frm) {
 }
 
 function create_boq(frm) {
-    frappe.msgprint(__('BOQ creation will be available after BOQ DocType is created'));
-    // TODO: Navigate to BOQ creation
-    // frappe.route_options = {
-    //     "opportunity": frm.doc.name
-    // };
-    // frappe.set_route("Form", "BOQ", "new-boq-1");
+    // Create new BOQ linked to this Opportunity
+    frappe.route_options = {
+        "opportunity": frm.doc.name
+    };
+    frappe.new_doc("BOQ");
 }

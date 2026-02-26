@@ -1,0 +1,78 @@
+{
+  "actions": [],
+  "creation": "2026-02-24 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "section",
+    "description",
+    "qty",
+    "unit",
+    "col_break_1",
+    "rate",
+    "amount",
+    "markup_percent"
+  ],
+  "fields": [
+    {
+      "fieldname": "section",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Section",
+      "options": "Preliminaries\nStructural Works\nCivil Works\nFlooring Works\nFloor Finishes Works\nPartition & Cladding Works\nWall Finishes Works\nCeiling Works\nCeiling Finishes Works\nShop Front Works\nDoor Works\nJoinery Works\nLoose Furniture Works\nExterior Works\nLandscaping Works\nHVAC Works\nElectrical Works\nLighting Works\nFire Life Safety Works\nIT Works\nCCTV Works\nAccess Control Works\nAccess Point Works\nMusic System Works\nAV Works\nPlumbing Works\nSanitaryware's\nWhite Goods\nMiscellaneous Works"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "in_list_view": 1,
+      "label": "Description"
+    },
+    {
+      "fieldname": "qty",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Qty"
+    },
+    {
+      "fieldname": "unit",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Unit",
+      "options": "UOM"
+    },
+    {
+      "fieldname": "col_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "rate",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Rate"
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_percent",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    }
+  ],
+  "istable": 1,
+  "modified": "2026-02-24 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Fitout Estimation",
+  "name": "BOQ Service",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

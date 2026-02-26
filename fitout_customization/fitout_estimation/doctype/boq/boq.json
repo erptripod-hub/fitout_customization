@@ -1,0 +1,197 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:BOQ-{opportunity}-{####}",
+  "creation": "2026-02-24 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "opportunity",
+    "customer",
+    "project_name",
+    "col_break_1",
+    "boq_type",
+    "status",
+    "boq_date",
+    "section_break_items",
+    "items",
+    "section_break_services",
+    "services",
+    "section_break_summary",
+    "total_items",
+    "total_services",
+    "col_break_totals",
+    "grand_total",
+    "vat_percent",
+    "vat_amount",
+    "final_value"
+  ],
+  "fields": [
+    {
+      "fieldname": "opportunity",
+      "fieldtype": "Link",
+      "label": "Opportunity",
+      "options": "Opportunity",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fetch_from": "opportunity.customer_name",
+      "fieldname": "customer",
+      "fieldtype": "Data",
+      "label": "Customer",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "opportunity.title",
+      "fieldname": "project_name",
+      "fieldtype": "Data",
+      "label": "Project Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "opportunity.custom_boq_type",
+      "fieldname": "boq_type",
+      "fieldtype": "Select",
+      "label": "BOQ Type",
+      "options": "\nFitout\nJoinery\nBoth",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nIn Progress\nCompleted\nApproved",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "boq_date",
+      "fieldtype": "Date",
+      "label": "BOQ Date",
+      "default": "Today"
+    },
+    {
+      "fieldname": "section_break_items",
+      "fieldtype": "Section Break",
+      "label": "Items / Joinery / Materials",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "BOQ Items",
+      "options": "BOQ Item",
+      "description": "Raw materials, joinery items, furniture with internal cost breakdown"
+    },
+    {
+      "fieldname": "section_break_services",
+      "fieldtype": "Section Break",
+      "label": "Works & Services (Subcontractor)",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "services",
+      "fieldtype": "Table",
+      "label": "BOQ Services",
+      "options": "BOQ Service",
+      "description": "HVAC, Electrical, CCTV, etc. - subcontractor works"
+    },
+    {
+      "fieldname": "section_break_summary",
+      "fieldtype": "Section Break",
+      "label": "BOQ Summary"
+    },
+    {
+      "fieldname": "total_items",
+      "fieldtype": "Currency",
+      "label": "Total Items",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_services",
+      "fieldtype": "Currency",
+      "label": "Total Services",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_totals",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "grand_total",
+      "fieldtype": "Currency",
+      "label": "Grand Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "vat_percent",
+      "fieldtype": "Percent",
+      "label": "VAT %",
+      "default": "5"
+    },
+    {
+      "fieldname": "vat_amount",
+      "fieldtype": "Currency",
+      "label": "VAT Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "final_value",
+      "fieldtype": "Currency",
+      "label": "Final Value Offered",
+      "read_only": 1,
+      "bold": 1
+    }
+  ],
+  "links": [
+    {
+      "link_doctype": "Opportunity",
+      "link_fieldname": "opportunity"
+    }
+  ],
+  "modified": "2026-02-24 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Fitout Estimation",
+  "name": "BOQ",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Sales User",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Sales Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "project_name",
+  "track_changes": 1
+}
