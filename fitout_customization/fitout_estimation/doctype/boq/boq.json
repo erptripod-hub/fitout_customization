@@ -14,12 +14,209 @@
     "boq_type",
     "status",
     "boq_date",
-    "section_break_items",
-    "line_items",
-    "section_break_markup",
-    "section_markup",
-    "column_break_markup",
-    "refresh_sections_btn",
+    "section_break_preliminaries",
+    "items_preliminaries",
+    "markup_preliminaries",
+    "col_break_total_preliminaries",
+    "base_total_preliminaries",
+    "markup_amount_preliminaries",
+    "section_total_preliminaries",
+    "section_break_structural_works",
+    "items_structural_works",
+    "markup_structural_works",
+    "col_break_total_structural_works",
+    "base_total_structural_works",
+    "markup_amount_structural_works",
+    "section_total_structural_works",
+    "section_break_civil_works",
+    "items_civil_works",
+    "markup_civil_works",
+    "col_break_total_civil_works",
+    "base_total_civil_works",
+    "markup_amount_civil_works",
+    "section_total_civil_works",
+    "section_break_flooring_works",
+    "items_flooring_works",
+    "markup_flooring_works",
+    "col_break_total_flooring_works",
+    "base_total_flooring_works",
+    "markup_amount_flooring_works",
+    "section_total_flooring_works",
+    "section_break_floor_finishes_works",
+    "items_floor_finishes_works",
+    "markup_floor_finishes_works",
+    "col_break_total_floor_finishes_works",
+    "base_total_floor_finishes_works",
+    "markup_amount_floor_finishes_works",
+    "section_total_floor_finishes_works",
+    "section_break_partition_and_cladding_works",
+    "items_partition_and_cladding_works",
+    "markup_partition_and_cladding_works",
+    "col_break_total_partition_and_cladding_works",
+    "base_total_partition_and_cladding_works",
+    "markup_amount_partition_and_cladding_works",
+    "section_total_partition_and_cladding_works",
+    "section_break_wall_finishes_works",
+    "items_wall_finishes_works",
+    "markup_wall_finishes_works",
+    "col_break_total_wall_finishes_works",
+    "base_total_wall_finishes_works",
+    "markup_amount_wall_finishes_works",
+    "section_total_wall_finishes_works",
+    "section_break_ceiling_works",
+    "items_ceiling_works",
+    "markup_ceiling_works",
+    "col_break_total_ceiling_works",
+    "base_total_ceiling_works",
+    "markup_amount_ceiling_works",
+    "section_total_ceiling_works",
+    "section_break_ceiling_finishes_works",
+    "items_ceiling_finishes_works",
+    "markup_ceiling_finishes_works",
+    "col_break_total_ceiling_finishes_works",
+    "base_total_ceiling_finishes_works",
+    "markup_amount_ceiling_finishes_works",
+    "section_total_ceiling_finishes_works",
+    "section_break_shop_front_works",
+    "items_shop_front_works",
+    "markup_shop_front_works",
+    "col_break_total_shop_front_works",
+    "base_total_shop_front_works",
+    "markup_amount_shop_front_works",
+    "section_total_shop_front_works",
+    "section_break_door_works",
+    "items_door_works",
+    "markup_door_works",
+    "col_break_total_door_works",
+    "base_total_door_works",
+    "markup_amount_door_works",
+    "section_total_door_works",
+    "section_break_joinery_works",
+    "items_joinery_works",
+    "markup_joinery_works",
+    "col_break_total_joinery_works",
+    "base_total_joinery_works",
+    "markup_amount_joinery_works",
+    "section_total_joinery_works",
+    "section_break_loose_furniture_works",
+    "items_loose_furniture_works",
+    "markup_loose_furniture_works",
+    "col_break_total_loose_furniture_works",
+    "base_total_loose_furniture_works",
+    "markup_amount_loose_furniture_works",
+    "section_total_loose_furniture_works",
+    "section_break_exterior_works",
+    "items_exterior_works",
+    "markup_exterior_works",
+    "col_break_total_exterior_works",
+    "base_total_exterior_works",
+    "markup_amount_exterior_works",
+    "section_total_exterior_works",
+    "section_break_landscaping_works",
+    "items_landscaping_works",
+    "markup_landscaping_works",
+    "col_break_total_landscaping_works",
+    "base_total_landscaping_works",
+    "markup_amount_landscaping_works",
+    "section_total_landscaping_works",
+    "section_break_hvac_works",
+    "items_hvac_works",
+    "markup_hvac_works",
+    "col_break_total_hvac_works",
+    "base_total_hvac_works",
+    "markup_amount_hvac_works",
+    "section_total_hvac_works",
+    "section_break_electrical_works",
+    "items_electrical_works",
+    "markup_electrical_works",
+    "col_break_total_electrical_works",
+    "base_total_electrical_works",
+    "markup_amount_electrical_works",
+    "section_total_electrical_works",
+    "section_break_lighting_works",
+    "items_lighting_works",
+    "markup_lighting_works",
+    "col_break_total_lighting_works",
+    "base_total_lighting_works",
+    "markup_amount_lighting_works",
+    "section_total_lighting_works",
+    "section_break_fire_life_safety_works",
+    "items_fire_life_safety_works",
+    "markup_fire_life_safety_works",
+    "col_break_total_fire_life_safety_works",
+    "base_total_fire_life_safety_works",
+    "markup_amount_fire_life_safety_works",
+    "section_total_fire_life_safety_works",
+    "section_break_it_works",
+    "items_it_works",
+    "markup_it_works",
+    "col_break_total_it_works",
+    "base_total_it_works",
+    "markup_amount_it_works",
+    "section_total_it_works",
+    "section_break_cctv_works",
+    "items_cctv_works",
+    "markup_cctv_works",
+    "col_break_total_cctv_works",
+    "base_total_cctv_works",
+    "markup_amount_cctv_works",
+    "section_total_cctv_works",
+    "section_break_access_control_works",
+    "items_access_control_works",
+    "markup_access_control_works",
+    "col_break_total_access_control_works",
+    "base_total_access_control_works",
+    "markup_amount_access_control_works",
+    "section_total_access_control_works",
+    "section_break_access_point_works",
+    "items_access_point_works",
+    "markup_access_point_works",
+    "col_break_total_access_point_works",
+    "base_total_access_point_works",
+    "markup_amount_access_point_works",
+    "section_total_access_point_works",
+    "section_break_music_system_works",
+    "items_music_system_works",
+    "markup_music_system_works",
+    "col_break_total_music_system_works",
+    "base_total_music_system_works",
+    "markup_amount_music_system_works",
+    "section_total_music_system_works",
+    "section_break_av_works",
+    "items_av_works",
+    "markup_av_works",
+    "col_break_total_av_works",
+    "base_total_av_works",
+    "markup_amount_av_works",
+    "section_total_av_works",
+    "section_break_plumbing_works",
+    "items_plumbing_works",
+    "markup_plumbing_works",
+    "col_break_total_plumbing_works",
+    "base_total_plumbing_works",
+    "markup_amount_plumbing_works",
+    "section_total_plumbing_works",
+    "section_break_sanitarywares",
+    "items_sanitarywares",
+    "markup_sanitarywares",
+    "col_break_total_sanitarywares",
+    "base_total_sanitarywares",
+    "markup_amount_sanitarywares",
+    "section_total_sanitarywares",
+    "section_break_white_goods",
+    "items_white_goods",
+    "markup_white_goods",
+    "col_break_total_white_goods",
+    "base_total_white_goods",
+    "markup_amount_white_goods",
+    "section_total_white_goods",
+    "section_break_miscellaneous_works",
+    "items_miscellaneous_works",
+    "markup_miscellaneous_works",
+    "col_break_total_miscellaneous_works",
+    "base_total_miscellaneous_works",
+    "markup_amount_miscellaneous_works",
+    "section_total_miscellaneous_works",
     "section_break_summary",
     "subtotal",
     "vat_percent",
@@ -78,37 +275,1164 @@
       "default": "Today"
     },
     {
-      "fieldname": "section_break_items",
+      "fieldname": "section_break_preliminaries",
       "fieldtype": "Section Break",
-      "label": "BOQ Line Items"
+      "label": "1. Preliminaries",
+      "collapsible": 1
     },
     {
-      "fieldname": "line_items",
+      "fieldname": "items_preliminaries",
       "fieldtype": "Table",
-      "label": "Line Items",
-      "options": "BOQ Line Item",
-      "description": "All items - select Section for each line"
+      "label": "Preliminaries Items",
+      "options": "BOQ Preliminaries"
     },
     {
-      "fieldname": "section_break_markup",
-      "fieldtype": "Section Break",
-      "label": "Section-wise Markup"
+      "fieldname": "markup_preliminaries",
+      "fieldtype": "Percent",
+      "label": "Markup %"
     },
     {
-      "fieldname": "section_markup",
-      "fieldtype": "Table",
-      "label": "Section Markup",
-      "options": "BOQ Section Markup",
-      "description": "Markup % per section - auto-populated from line items"
-    },
-    {
-      "fieldname": "column_break_markup",
+      "fieldname": "col_break_total_preliminaries",
       "fieldtype": "Column Break"
     },
     {
-      "fieldname": "refresh_sections_btn",
-      "fieldtype": "Button",
-      "label": "Refresh Sections"
+      "fieldname": "base_total_preliminaries",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_preliminaries",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_preliminaries",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_structural_works",
+      "fieldtype": "Section Break",
+      "label": "2. Structural Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_structural_works",
+      "fieldtype": "Table",
+      "label": "Structural Works Items",
+      "options": "BOQ Structural Works"
+    },
+    {
+      "fieldname": "markup_structural_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_structural_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_structural_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_structural_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_structural_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_civil_works",
+      "fieldtype": "Section Break",
+      "label": "3. Civil Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_civil_works",
+      "fieldtype": "Table",
+      "label": "Civil Works Items",
+      "options": "BOQ Civil Works"
+    },
+    {
+      "fieldname": "markup_civil_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_civil_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_civil_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_civil_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_civil_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_flooring_works",
+      "fieldtype": "Section Break",
+      "label": "4. Flooring Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_flooring_works",
+      "fieldtype": "Table",
+      "label": "Flooring Works Items",
+      "options": "BOQ Flooring Works"
+    },
+    {
+      "fieldname": "markup_flooring_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_flooring_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_flooring_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_flooring_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_flooring_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_floor_finishes_works",
+      "fieldtype": "Section Break",
+      "label": "5. Floor Finishes Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_floor_finishes_works",
+      "fieldtype": "Table",
+      "label": "Floor Finishes Works Items",
+      "options": "BOQ Floor Finishes Works"
+    },
+    {
+      "fieldname": "markup_floor_finishes_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_floor_finishes_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_floor_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_floor_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_floor_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_partition_and_cladding_works",
+      "fieldtype": "Section Break",
+      "label": "6. Partition & Cladding Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_partition_and_cladding_works",
+      "fieldtype": "Table",
+      "label": "Partition & Cladding Works Items",
+      "options": "BOQ Partition & Cladding Works"
+    },
+    {
+      "fieldname": "markup_partition_and_cladding_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_partition_and_cladding_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_partition_and_cladding_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_partition_and_cladding_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_partition_and_cladding_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_wall_finishes_works",
+      "fieldtype": "Section Break",
+      "label": "7. Wall Finishes Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_wall_finishes_works",
+      "fieldtype": "Table",
+      "label": "Wall Finishes Works Items",
+      "options": "BOQ Wall Finishes Works"
+    },
+    {
+      "fieldname": "markup_wall_finishes_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_wall_finishes_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_wall_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_wall_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_wall_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_ceiling_works",
+      "fieldtype": "Section Break",
+      "label": "8. Ceiling Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_ceiling_works",
+      "fieldtype": "Table",
+      "label": "Ceiling Works Items",
+      "options": "BOQ Ceiling Works"
+    },
+    {
+      "fieldname": "markup_ceiling_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_ceiling_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_ceiling_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_ceiling_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_ceiling_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_ceiling_finishes_works",
+      "fieldtype": "Section Break",
+      "label": "9. Ceiling Finishes Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_ceiling_finishes_works",
+      "fieldtype": "Table",
+      "label": "Ceiling Finishes Works Items",
+      "options": "BOQ Ceiling Finishes Works"
+    },
+    {
+      "fieldname": "markup_ceiling_finishes_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_ceiling_finishes_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_ceiling_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_ceiling_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_ceiling_finishes_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_shop_front_works",
+      "fieldtype": "Section Break",
+      "label": "10. Shop Front Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_shop_front_works",
+      "fieldtype": "Table",
+      "label": "Shop Front Works Items",
+      "options": "BOQ Shop Front Works"
+    },
+    {
+      "fieldname": "markup_shop_front_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_shop_front_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_shop_front_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_shop_front_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_shop_front_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_door_works",
+      "fieldtype": "Section Break",
+      "label": "11. Door Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_door_works",
+      "fieldtype": "Table",
+      "label": "Door Works Items",
+      "options": "BOQ Door Works"
+    },
+    {
+      "fieldname": "markup_door_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_door_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_door_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_door_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_door_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_joinery_works",
+      "fieldtype": "Section Break",
+      "label": "12. Joinery Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_joinery_works",
+      "fieldtype": "Table",
+      "label": "Joinery Works Items",
+      "options": "BOQ Joinery Works"
+    },
+    {
+      "fieldname": "markup_joinery_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_joinery_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_joinery_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_joinery_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_joinery_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_loose_furniture_works",
+      "fieldtype": "Section Break",
+      "label": "13. Loose Furniture Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_loose_furniture_works",
+      "fieldtype": "Table",
+      "label": "Loose Furniture Works Items",
+      "options": "BOQ Loose Furniture Works"
+    },
+    {
+      "fieldname": "markup_loose_furniture_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_loose_furniture_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_loose_furniture_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_loose_furniture_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_loose_furniture_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_exterior_works",
+      "fieldtype": "Section Break",
+      "label": "14. Exterior Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_exterior_works",
+      "fieldtype": "Table",
+      "label": "Exterior Works Items",
+      "options": "BOQ Exterior Works"
+    },
+    {
+      "fieldname": "markup_exterior_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_exterior_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_exterior_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_exterior_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_exterior_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_landscaping_works",
+      "fieldtype": "Section Break",
+      "label": "15. Landscaping Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_landscaping_works",
+      "fieldtype": "Table",
+      "label": "Landscaping Works Items",
+      "options": "BOQ Landscaping Works"
+    },
+    {
+      "fieldname": "markup_landscaping_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_landscaping_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_landscaping_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_landscaping_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_landscaping_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_hvac_works",
+      "fieldtype": "Section Break",
+      "label": "16. HVAC Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_hvac_works",
+      "fieldtype": "Table",
+      "label": "HVAC Works Items",
+      "options": "BOQ HVAC Works"
+    },
+    {
+      "fieldname": "markup_hvac_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_hvac_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_hvac_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_hvac_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_hvac_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_electrical_works",
+      "fieldtype": "Section Break",
+      "label": "17. Electrical Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_electrical_works",
+      "fieldtype": "Table",
+      "label": "Electrical Works Items",
+      "options": "BOQ Electrical Works"
+    },
+    {
+      "fieldname": "markup_electrical_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_electrical_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_electrical_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_electrical_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_electrical_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_lighting_works",
+      "fieldtype": "Section Break",
+      "label": "18. Lighting Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_lighting_works",
+      "fieldtype": "Table",
+      "label": "Lighting Works Items",
+      "options": "BOQ Lighting Works"
+    },
+    {
+      "fieldname": "markup_lighting_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_lighting_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_lighting_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_lighting_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_lighting_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_fire_life_safety_works",
+      "fieldtype": "Section Break",
+      "label": "19. Fire Life Safety Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_fire_life_safety_works",
+      "fieldtype": "Table",
+      "label": "Fire Life Safety Works Items",
+      "options": "BOQ Fire Life Safety Works"
+    },
+    {
+      "fieldname": "markup_fire_life_safety_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_fire_life_safety_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_fire_life_safety_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_fire_life_safety_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_fire_life_safety_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_it_works",
+      "fieldtype": "Section Break",
+      "label": "20. IT Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_it_works",
+      "fieldtype": "Table",
+      "label": "IT Works Items",
+      "options": "BOQ IT Works"
+    },
+    {
+      "fieldname": "markup_it_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_it_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_it_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_it_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_it_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_cctv_works",
+      "fieldtype": "Section Break",
+      "label": "21. CCTV Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_cctv_works",
+      "fieldtype": "Table",
+      "label": "CCTV Works Items",
+      "options": "BOQ CCTV Works"
+    },
+    {
+      "fieldname": "markup_cctv_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_cctv_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_cctv_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_cctv_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_cctv_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_access_control_works",
+      "fieldtype": "Section Break",
+      "label": "22. Access Control Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_access_control_works",
+      "fieldtype": "Table",
+      "label": "Access Control Works Items",
+      "options": "BOQ Access Control Works"
+    },
+    {
+      "fieldname": "markup_access_control_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_access_control_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_access_control_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_access_control_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_access_control_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_access_point_works",
+      "fieldtype": "Section Break",
+      "label": "23. Access Point Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_access_point_works",
+      "fieldtype": "Table",
+      "label": "Access Point Works Items",
+      "options": "BOQ Access Point Works"
+    },
+    {
+      "fieldname": "markup_access_point_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_access_point_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_access_point_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_access_point_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_access_point_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_music_system_works",
+      "fieldtype": "Section Break",
+      "label": "24. Music System Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_music_system_works",
+      "fieldtype": "Table",
+      "label": "Music System Works Items",
+      "options": "BOQ Music System Works"
+    },
+    {
+      "fieldname": "markup_music_system_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_music_system_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_music_system_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_music_system_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_music_system_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_av_works",
+      "fieldtype": "Section Break",
+      "label": "25. AV Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_av_works",
+      "fieldtype": "Table",
+      "label": "AV Works Items",
+      "options": "BOQ AV Works"
+    },
+    {
+      "fieldname": "markup_av_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_av_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_av_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_av_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_av_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_plumbing_works",
+      "fieldtype": "Section Break",
+      "label": "26. Plumbing Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_plumbing_works",
+      "fieldtype": "Table",
+      "label": "Plumbing Works Items",
+      "options": "BOQ Plumbing Works"
+    },
+    {
+      "fieldname": "markup_plumbing_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_plumbing_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_plumbing_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_plumbing_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_plumbing_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_sanitarywares",
+      "fieldtype": "Section Break",
+      "label": "27. Sanitaryware's",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_sanitarywares",
+      "fieldtype": "Table",
+      "label": "Sanitaryware's Items",
+      "options": "BOQ Sanitarywares"
+    },
+    {
+      "fieldname": "markup_sanitarywares",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_sanitarywares",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_sanitarywares",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_sanitarywares",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_sanitarywares",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_white_goods",
+      "fieldtype": "Section Break",
+      "label": "28. White Goods",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_white_goods",
+      "fieldtype": "Table",
+      "label": "White Goods Items",
+      "options": "BOQ White Goods"
+    },
+    {
+      "fieldname": "markup_white_goods",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_white_goods",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_white_goods",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_white_goods",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_white_goods",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "section_break_miscellaneous_works",
+      "fieldtype": "Section Break",
+      "label": "29. Miscellaneous Works",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "items_miscellaneous_works",
+      "fieldtype": "Table",
+      "label": "Miscellaneous Works Items",
+      "options": "BOQ Miscellaneous Works"
+    },
+    {
+      "fieldname": "markup_miscellaneous_works",
+      "fieldtype": "Percent",
+      "label": "Markup %"
+    },
+    {
+      "fieldname": "col_break_total_miscellaneous_works",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "base_total_miscellaneous_works",
+      "fieldtype": "Currency",
+      "label": "Base Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "markup_amount_miscellaneous_works",
+      "fieldtype": "Currency",
+      "label": "Markup Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_total_miscellaneous_works",
+      "fieldtype": "Currency",
+      "label": "Section Total",
+      "read_only": 1,
+      "bold": 1
     },
     {
       "fieldname": "section_break_summary",

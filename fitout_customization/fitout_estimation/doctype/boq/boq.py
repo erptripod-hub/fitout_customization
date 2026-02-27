@@ -3,46 +3,52 @@ from frappe.model.document import Document
 
 class BOQ(Document):
     def validate(self):
-        self.calculate_line_amounts()
+        self.calculate_all_sections()
         self.validate_prerequisites()
-        self.calculate_totals()
     
-    def calculate_line_amounts(self):
-        """Calculate amount for each line item"""
-        for item in self.line_items:
-            item.amount = (item.qty or 0) * (item.rate or 0)
-    
-    def calculate_totals(self):
-        """Calculate section totals with markup and grand total"""
-        # Calculate section base amounts from line items
-        section_totals = {}
-        for item in self.line_items:
-            section = item.section
-            if section:
-                if section not in section_totals:
-                    section_totals[section] = 0
-                section_totals[section] += (item.amount or 0)
+    def calculate_all_sections(self):
+        """Calculate totals for all 29 sections"""
+        sections = [
+            "preliminaries", "structural_works", "civil_works", "flooring_works",
+            "floor_finishes_works", "partition_and_cladding_works", "wall_finishes_works",
+            "ceiling_works", "ceiling_finishes_works", "shop_front_works", "door_works",
+            "joinery_works", "loose_furniture_works", "exterior_works", "landscaping_works",
+            "hvac_works", "electrical_works", "lighting_works", "fire_life_safety_works",
+            "it_works", "cctv_works", "access_control_works", "access_point_works",
+            "music_system_works", "av_works", "plumbing_works", "sanitarywares",
+            "white_goods", "miscellaneous_works"
+        ]
         
-        # Update section markup table
-        for markup_row in self.section_markup:
-            section = markup_row.section
-            base_amount = section_totals.get(section, 0)
-            markup_row.base_amount = base_amount
-            
-            markup_percent = markup_row.markup_percent or 0
-            markup_row.markup_amount = (base_amount * markup_percent) / 100
-            markup_row.total_amount = base_amount + markup_row.markup_amount
+        overall_subtotal = 0
         
-        # Calculate subtotal (sum of all section totals with markup)
-        subtotal = sum(row.total_amount or 0 for row in self.section_markup)
-        self.subtotal = subtotal
+        for section in sections:
+            # Calculate line item amounts
+            items_field = f"items_{section}"
+            if hasattr(self, items_field):
+                items = getattr(self, items_field) or []
+                for item in items:
+                    item.amount = (item.qty or 0) * (item.rate or 0)
+                
+                # Calculate section base total
+                base_total = sum(item.amount or 0 for item in items)
+                setattr(self, f"base_total_{section}", base_total)
+                
+                # Calculate markup
+                markup_percent = getattr(self, f"markup_{section}") or 0
+                markup_amount = (base_total * markup_percent) / 100
+                setattr(self, f"markup_amount_{section}", markup_amount)
+                
+                # Calculate section total
+                section_total = base_total + markup_amount
+                setattr(self, f"section_total_{section}", section_total)
+                
+                overall_subtotal += section_total
         
-        # Calculate VAT
+        # Update summary
+        self.subtotal = overall_subtotal
         vat_percent = self.vat_percent or 0
-        self.vat_amount = (subtotal * vat_percent) / 100
-        
-        # Grand total
-        self.grand_total = subtotal + self.vat_amount
+        self.vat_amount = (overall_subtotal * vat_percent) / 100
+        self.grand_total = overall_subtotal + self.vat_amount
     
     def validate_prerequisites(self):
         """Check if RFI and Site Survey are completed if required"""
@@ -68,34 +74,3 @@ class BOQ(Document):
             })
             if not survey_completed:
                 frappe.throw("Site Survey must be completed before creating BOQ")
-
-
-@frappe.whitelist()
-def refresh_sections(boq_name):
-    """Refresh section markup table based on line items"""
-    doc = frappe.get_doc("BOQ", boq_name)
-    
-    # Get unique sections from line items
-    sections_in_use = set()
-    for item in doc.line_items:
-        if item.section:
-            sections_in_use.add(item.section)
-    
-    # Get existing sections in markup table
-    existing_sections = {row.section for row in doc.section_markup}
-    
-    # Add missing sections
-    for section in sections_in_use:
-        if section not in existing_sections:
-            doc.append("section_markup", {
-                "section": section,
-                "markup_percent": 0
-            })
-    
-    # Remove sections no longer in use
-    doc.section_markup = [row for row in doc.section_markup if row.section in sections_in_use]
-    
-    doc.save()
-    frappe.msgprint(f"Sections refreshed. {len(sections_in_use)} sections found.")
-    
-    return doc

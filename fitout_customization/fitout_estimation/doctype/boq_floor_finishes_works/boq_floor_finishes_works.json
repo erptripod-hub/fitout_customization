@@ -5,7 +5,6 @@
   "editable_grid": 1,
   "engine": "InnoDB",
   "field_order": [
-    "section",
     "description",
     "image",
     "col_break_1",
@@ -15,14 +14,6 @@
     "amount"
   ],
   "fields": [
-    {
-      "fieldname": "section",
-      "fieldtype": "Select",
-      "in_list_view": 1,
-      "label": "Section",
-      "reqd": 1,
-      "options": "Preliminaries\nStructural Works\nCivil Works\nFlooring Works\nFloor Finishes Works\nPartition & Cladding Works\nWall Finishes Works\nCeiling Works\nCeiling Finishes Works\nShop Front Works\nDoor Works\nJoinery Works\nLoose Furniture Works\nExterior Works\nLandscaping Works\nHVAC Works\nElectrical Works\nLighting Works\nFire Life Safety Works\nIT Works\nCCTV Works\nAccess Control Works\nAccess Point Works\nMusic System Works\nAV Works\nPlumbing Works\nSanitaryware's\nWhite Goods\nMiscellaneous Works"
-    },
     {
       "fieldname": "description",
       "fieldtype": "Text Editor",
@@ -71,7 +62,7 @@
   "modified": "2026-02-27 00:00:00.000000",
   "modified_by": "Administrator",
   "module": "Fitout Estimation",
-  "name": "BOQ Line Item",
+  "name": "BOQ Floor Finishes Works",
   "owner": "Administrator",
   "permissions": [],
   "sort_field": "modified",
