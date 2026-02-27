@@ -2,7 +2,7 @@
   "actions": [],
   "allow_rename": 1,
   "autoname": "format:BOQ-{opportunity}-{####}",
-  "creation": "2026-02-24 00:00:00.000000",
+  "creation": "2026-02-27 00:00:00.000000",
   "doctype": "DocType",
   "editable_grid": 1,
   "engine": "InnoDB",
@@ -15,17 +15,17 @@
     "status",
     "boq_date",
     "section_break_items",
-    "items",
-    "section_break_services",
-    "services",
+    "line_items",
+    "section_break_markup",
+    "section_markup",
+    "column_break_markup",
+    "refresh_sections_btn",
     "section_break_summary",
-    "total_items",
-    "total_services",
-    "col_break_totals",
-    "grand_total",
+    "subtotal",
     "vat_percent",
     "vat_amount",
-    "final_value"
+    "col_break_summary",
+    "grand_total"
   ],
   "fields": [
     {
@@ -80,28 +80,35 @@
     {
       "fieldname": "section_break_items",
       "fieldtype": "Section Break",
-      "label": "Items / Joinery / Materials",
-      "collapsible": 1
+      "label": "BOQ Line Items"
     },
     {
-      "fieldname": "items",
+      "fieldname": "line_items",
       "fieldtype": "Table",
-      "label": "BOQ Items",
-      "options": "BOQ Item",
-      "description": "Raw materials, joinery items, furniture with internal cost breakdown"
+      "label": "Line Items",
+      "options": "BOQ Line Item",
+      "description": "All items - select Section for each line"
     },
     {
-      "fieldname": "section_break_services",
+      "fieldname": "section_break_markup",
       "fieldtype": "Section Break",
-      "label": "Works & Services (Subcontractor)",
-      "collapsible": 1
+      "label": "Section-wise Markup"
     },
     {
-      "fieldname": "services",
+      "fieldname": "section_markup",
       "fieldtype": "Table",
-      "label": "BOQ Services",
-      "options": "BOQ Service",
-      "description": "HVAC, Electrical, CCTV, etc. - subcontractor works"
+      "label": "Section Markup",
+      "options": "BOQ Section Markup",
+      "description": "Markup % per section - auto-populated from line items"
+    },
+    {
+      "fieldname": "column_break_markup",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "refresh_sections_btn",
+      "fieldtype": "Button",
+      "label": "Refresh Sections"
     },
     {
       "fieldname": "section_break_summary",
@@ -109,25 +116,9 @@
       "label": "BOQ Summary"
     },
     {
-      "fieldname": "total_items",
+      "fieldname": "subtotal",
       "fieldtype": "Currency",
-      "label": "Total Items",
-      "read_only": 1
-    },
-    {
-      "fieldname": "total_services",
-      "fieldtype": "Currency",
-      "label": "Total Services",
-      "read_only": 1
-    },
-    {
-      "fieldname": "col_break_totals",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "grand_total",
-      "fieldtype": "Currency",
-      "label": "Grand Total",
+      "label": "Subtotal (Before VAT)",
       "read_only": 1,
       "bold": 1
     },
@@ -144,9 +135,13 @@
       "read_only": 1
     },
     {
-      "fieldname": "final_value",
+      "fieldname": "col_break_summary",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "grand_total",
       "fieldtype": "Currency",
-      "label": "Final Value Offered",
+      "label": "Grand Total (Final Value)",
       "read_only": 1,
       "bold": 1
     }
@@ -157,7 +152,7 @@
       "link_fieldname": "opportunity"
     }
   ],
-  "modified": "2026-02-24 00:00:00.000000",
+  "modified": "2026-02-27 00:00:00.000000",
   "modified_by": "Administrator",
   "module": "Fitout Estimation",
   "name": "BOQ",
