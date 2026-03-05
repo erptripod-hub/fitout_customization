@@ -217,6 +217,8 @@
     "base_total_miscellaneous_works",
     "markup_amount_miscellaneous_works",
     "section_total_miscellaneous_works",
+    "section_break_boq_summary_table",
+    "boq_summary_table",
     "section_break_summary",
     "subtotal",
     "vat_percent",
@@ -1433,6 +1435,17 @@
       "label": "Section Total",
       "read_only": 1,
       "bold": 1
+    },
+    {
+      "fieldname": "section_break_boq_summary_table",
+      "fieldtype": "Section Break",
+      "label": "BOQ Summary Table"
+    },
+    {
+      "fieldname": "boq_summary_table",
+      "fieldtype": "HTML",
+      "label": "Summary Table",
+      "options": "<div id='boq-summary-table'></div>"
     },
     {
       "fieldname": "section_break_summary",

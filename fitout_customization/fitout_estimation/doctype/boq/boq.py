@@ -19,9 +19,21 @@ class BOQ(Document):
             "white_goods", "miscellaneous_works"
         ]
         
-        overall_subtotal = 0
+        section_names = [
+            "Preliminaries", "Structural Works", "Civil Works", "Flooring Works",
+            "Floor Finishes Works", "Partition & Cladding Works", "Wall Finishes Works",
+            "Ceiling Works", "Ceiling Finishes Works", "Shop Front Works", "Door Works",
+            "Joinery Works", "Loose Furniture Works", "Exterior Works", "Landscaping Works",
+            "HVAC Works", "Electrical Works", "Lighting Works", "Fire Life Safety Works",
+            "IT Works", "CCTV Works", "Access Control Works", "Access Point Works",
+            "Music System Works", "AV Works", "Plumbing Works", "Sanitaryware's",
+            "White Goods", "Miscellaneous Works"
+        ]
         
-        for section in sections:
+        overall_subtotal = 0
+        summary_rows = []
+        
+        for idx, section in enumerate(sections):
             # Calculate line item amounts
             items_field = f"items_{section}"
             if hasattr(self, items_field):
@@ -43,12 +55,70 @@ class BOQ(Document):
                 setattr(self, f"section_total_{section}", section_total)
                 
                 overall_subtotal += section_total
+                
+                # Add to summary if section has items
+                if len(items) > 0:
+                    summary_rows.append({
+                        'letter': chr(65 + idx),  # A, B, C, etc.
+                        'name': section_names[idx],
+                        'total': section_total
+                    })
+        
+        # Generate summary HTML table
+        self.generate_summary_table(summary_rows, overall_subtotal)
         
         # Update summary
         self.subtotal = overall_subtotal
         vat_percent = self.vat_percent or 0
         self.vat_amount = (overall_subtotal * vat_percent) / 100
         self.grand_total = overall_subtotal + self.vat_amount
+    
+    def generate_summary_table(self, summary_rows, subtotal):
+        """Generate HTML summary table"""
+        html = """
+        <table class='table table-bordered' style='margin-top:20px;'>
+            <thead style='background:#1f4788;color:white;'>
+                <tr>
+                    <th style='width:10%;'>Ref</th>
+                    <th style='width:60%;'>Section Name</th>
+                    <th style='width:30%;text-align:right;'>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+        
+        for row in summary_rows:
+            html += f"""
+                <tr>
+                    <td><strong>{row['letter']}</strong></td>
+                    <td>{row['name']}</td>
+                    <td style='text-align:right;'>{frappe.utils.fmt_money(row['total'], currency=self.currency if hasattr(self, 'currency') else 'AED')}</td>
+                </tr>
+            """
+        
+        vat_amount = (subtotal * (self.vat_percent or 0)) / 100
+        grand_total = subtotal + vat_amount
+        
+        html += f"""
+            </tbody>
+            <tfoot>
+                <tr style='background:#f0f4f8;'>
+                    <td colspan='2' style='text-align:right;'><strong>SUB TOTAL AMOUNT</strong></td>
+                    <td style='text-align:right;'><strong>{frappe.utils.fmt_money(subtotal, currency=self.currency if hasattr(self, 'currency') else 'AED')}</strong></td>
+                </tr>
+                <tr>
+                    <td colspan='2' style='text-align:right;'><strong>VAT @ {self.vat_percent or 0}%</strong></td>
+                    <td style='text-align:right;'><strong>{frappe.utils.fmt_money(vat_amount, currency=self.currency if hasattr(self, 'currency') else 'AED')}</strong></td>
+                </tr>
+                <tr style='background:#1f4788;color:white;'>
+                    <td colspan='2' style='text-align:right;'><strong>FINAL VALUE OFFERED</strong></td>
+                    <td style='text-align:right;'><strong>{frappe.utils.fmt_money(grand_total, currency=self.currency if hasattr(self, 'currency') else 'AED')}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        """
+        
+        self.boq_summary_table = html
     
     def validate_prerequisites(self):
         """Check if RFI and Site Survey are completed if required"""

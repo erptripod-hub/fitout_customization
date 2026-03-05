@@ -15,6 +15,9 @@
     "date_received",
     "section_break_questions",
     "questions",
+    "section_break_checklist",
+    "checklist_items",
+    "load_checklist_btn",
     "section_break_responses",
     "responses",
     "section_break_attachments",
@@ -75,6 +78,23 @@
       "fieldname": "questions",
       "fieldtype": "Text Editor",
       "label": "Questions / Information Required"
+    },
+    {
+      "fieldname": "section_break_checklist",
+      "fieldtype": "Section Break",
+      "label": "RFI Checklist"
+    },
+    {
+      "fieldname": "checklist_items",
+      "fieldtype": "Table",
+      "label": "Checklist Items",
+      "options": "RFI Checklist Item",
+      "description": "Track document/drawing requirements"
+    },
+    {
+      "fieldname": "load_checklist_btn",
+      "fieldtype": "Button",
+      "label": "Load Standard Checklist"
     },
     {
       "fieldname": "section_break_responses",

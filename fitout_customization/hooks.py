@@ -11,7 +11,8 @@ app_license = "MIT"
 doctype_js = {
     "Lead": "public/js/lead.js",
     "Opportunity": "public/js/opportunity.js",
-    "BOQ": "public/js/boq.js"
+    "BOQ": "public/js/boq.js",
+    "RFI": "public/js/rfi.js"
 }
 
 # Fixtures

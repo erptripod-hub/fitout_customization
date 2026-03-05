@@ -1,0 +1,61 @@
+{
+  "actions": [],
+  "creation": "2026-02-27 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "item_no",
+    "required_detail",
+    "col_break_1",
+    "received",
+    "not_received"
+  ],
+  "fields": [
+    {
+      "fieldname": "item_no",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "No.",
+      "read_only": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "required_detail",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Required Details",
+      "read_only": 1,
+      "columns": 6
+    },
+    {
+      "fieldname": "col_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "received",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Received",
+      "columns": 1
+    },
+    {
+      "fieldname": "not_received",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Not Received",
+      "columns": 1
+    }
+  ],
+  "istable": 1,
+  "modified": "2026-02-27 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Fitout Estimation",
+  "name": "RFI Checklist Item",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}
