@@ -17,7 +17,7 @@ frappe.pages['bd-dashboard'].on_page_load = function(wrapper) {
 		'.bdd .hdr-r select{background:#1e2a3b;border:1px solid #2d3748;color:#e2e8f0;padding:6px 10px;border-radius:6px;font-size:12px}' +
 		'.bdd .sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#64748b;margin:18px 0 10px 0}' +
 		'.bdd .krow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:4px}' +
-		'.bdd .krow6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:4px}' +
+		'.bdd .krow5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:4px}' +
 		'.bdd .kc{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.08);border-top:4px solid #2563eb}' +
 		'.bdd .kc .t{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#64748b;font-weight:600;margin-bottom:8px}' +
 		'.bdd .kc .v{font-size:24px;font-weight:800;color:#1e293b;line-height:1}' +
@@ -148,11 +148,11 @@ frappe.pages['bd-dashboard'].on_page_load = function(wrapper) {
 		// Section 1 - Core KPIs
 		var kpi1 =
 			'<div class="sec">Pipeline Overview</div>' +
-			'<div class="krow6" style="margin-bottom:16px">' +
+			'<div class="krow5" style="margin-bottom:16px">' +
 			'<div class="kc" style="border-top-color:#2563eb"><div class="t">BD Pipeline Leads</div><div class="v">'+d.total+'</div><div class="s">of '+d.total_all+' total leads</div></div>' +
 			'<div class="kc" style="border-top-color:#0d9488"><div class="t">Pipeline Value</div><div class="v" style="font-size:18px">'+fmt(d.pipeline_value)+'</div><div class="s">Gross estimated</div></div>' +
 			'<div class="kc" style="border-top-color:#7c3aed"><div class="t">Weighted Pipeline</div><div class="v" style="font-size:18px">'+fmt(d.weighted_pipeline)+'</div><div class="s">Probability adjusted</div></div>' +
-			'<div class="kc" style="border-top-color:#16a34a"><div class="t">Est. Margin Value</div><div class="v" style="font-size:18px">'+fmt(d.total_margin)+'</div><div class="s">Gross profit est.</div></div>' +
+
 			'<div class="kc" style="border-top-color:#d97706"><div class="t">Qualified</div><div class="v">'+d.qualified+'</div><div class="s" style="color:#16a34a">'+pc(d.qualified,d.total)+'% of total</div></div>' +
 			'<div class="kc" style="border-top-color:#dc2626"><div class="t">Ghost Leads</div><div class="v" style="color:#dc2626">'+d.ghost+'</div><div class="s" style="color:#dc2626">Need urgent action</div></div>' +
 			'</div>';
@@ -197,11 +197,10 @@ frappe.pages['bd-dashboard'].on_page_load = function(wrapper) {
 				'<td>'+(ann?fmt(ann):'—')+'</td>' +
 				'<td style="color:#0d9488;font-weight:600">'+fmt(o.value)+'</td>' +
 				'<td style="color:#7c3aed;font-weight:600">'+fmt(o.weighted)+'</td>' +
-				'<td style="color:#16a34a;font-weight:600">'+fmt(o.margin)+'</td>' +
 				'<td>'+o.total+'</td><td>'+o.qualified+'</td><td>'+o.converted+'</td>' +
 				'<td>'+(ann?'<div class="pg"><div class="pk"><div class="pf" style="width:'+pr+'%;background:'+col+'"></div></div><span style="font-size:11px;font-weight:700;color:'+col+'">'+pr+'%</span></div>':'—')+'</td>' +
 				'</tr>';
-		}).join('') || '<tr><td colspan="9" style="color:#64748b;text-align:center;padding:20px">No data</td></tr>';
+		}).join('') || '<tr><td colspan="8" style="color:#64748b;text-align:center;padding:20px">No data</td></tr>';
 
 		// Ghost alerts
 		var ghtml = (d.ghost_leads||[]).length ? (d.ghost_leads||[]).map(function(l){
@@ -217,8 +216,8 @@ frappe.pages['bd-dashboard'].on_page_load = function(wrapper) {
 			'<div class="pn"><div class="pt">Quarterly Overview</div><div class="ps">Pipeline value vs target</div><div class="qg">'+qhtml+'</div></div>' +
 			'</div>' +
 			'<div class="sec">Salesperson Performance</div>' +
-			'<div class="pn" style="margin-bottom:16px"><div class="pt">Target vs Actual — '+d.year+'</div><div class="ps">Pipeline, weighted pipeline, margin and achievement per salesperson</div>' +
-			'<table><thead><tr><th>Salesperson</th><th>Annual Target</th><th>Pipeline Value</th><th>Weighted Pipeline</th><th>Est. Margin</th><th>Leads</th><th>Qualified</th><th>Converted</th><th>Achievement</th></tr></thead>' +
+			'<div class="pn" style="margin-bottom:16px"><div class="pt">Target vs Actual — '+d.year+'</div><div class="ps">Pipeline, weighted pipeline and achievement per salesperson</div>' +
+			'<table><thead><tr><th>Salesperson</th><th>Annual Target</th><th>Pipeline Value</th><th>Weighted Pipeline</th><th>Leads</th><th>Qualified</th><th>Converted</th><th>Achievement</th></tr></thead>' +
 			'<tbody>'+orows+'</tbody></table></div>' +
 			'<div class="g32">' +
 			'<div class="pn"><div class="pt">Lead Health Monitor</div><div class="ps">Contact activity status</div>' +
